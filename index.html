@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<!-- saved from url=(0256)#portfolio -->
+<html lang="id">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gendesign.id</title>
+
+    <link href="./assets/css/fonts.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">
+
+    <link rel="stylesheet" href="./assets/css/lenis.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/mobile.css">
+
+    <script>
+        document.addEventListener("mousemove", (e) => {
+            const photo = document.querySelector(".hero-photo");
+
+            if (!photo) return;
+
+            const x = (window.innerWidth / 2 - e.clientX) / 40;
+            const y = (window.innerHeight / 2 - e.clientY) / 40;
+
+            photo.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    </script>
+</head>
+
+
+
+<body class="intro-active">
+
+    <div id="intro">
+        <div id="particles"></div>
+
+        <div class="loader">
+            <div id="loading-number">0%</div>
+            <div class="loading-bar">
+                <div id="loading-fill"></div>
+            </div>
+        </div>
+
+        <div id="intro-tagline">
+            PORTOFOLIO REZA PAHLEPI.
+        </div>
+        <img id="intro-logo" src="./assets/images/Logo-navbar.png" alt="GEN Logo">
+    </div>
+
+    <div class="mouse-glow"></div>
+
+    <div class="aurora">
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+    </div>
+
+
+
+    <section class="hero">
+        <section id="hero">
+
+            <nav class="navbar hero-navbar">
+
+                <img src="./assets/images/Logo-navbar.png" alt="Logo Gen" class="nav-logo" id="navbar-logo">
+
+                <button class="mobile-menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+                <ul class="nav-links" id="mainNav">
+                    <li><a href="#hero" class="active-link">Home</a></li>
+                    <li><a href="#portfolio" class="">Portofolio</a></li>
+                    <li><a href="#prices" class="">Prices</a></li>
+                    <li><a href="#payment" class="">Order</a></li>
+                </ul>
+
+                <a href="https://www.instagram.com/gendesign.id" target="_blank" class="social-tag">
+                    @gendesign.id
+                </a>
+
+            </nav>
+
+            <nav class="navbar sticky-navbar show hide">
+
+                <img src="./assets/images/Logo-navbar.png" alt="Logo Gen" class="nav-logo">
+
+                <button class="mobile-menu-btn sticky-menu-btn" id="stickyMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-links" id="stickyNav">
+                    <li><a href="#hero" class="active-link">Home</a></li>
+                    <li><a href="#portfolio" class="">Portofolio</a></li>
+                    <li><a href="#prices" class="">Prices</a></li>
+                    <li><a href="#payment" class="">Order</a></li>
+                </ul>
+
+                <a href="https://www.instagram.com/gendesign.id" target="_blank" class="social-tag">
+                    @gendesign.id
+                </a>
+
+                <div class="scroll-progress">
+                    <div class="scroll-progress-fill" style="width: 13.3369%;"></div>
+                </div>
+            </nav>
+
+            <main class="hero">
+
+                <div class="container">
+
+                    <canvas id="lanyardCanvas" width="1287" height="530"></canvas>
+
+                    <div class="hero-text">
+
+                        <p class="greeting">
+                            Hi! I'm <span>Reza</span>
+                        </p>
+
+                        <h1>Fullstack Developer.</h1>
+
+                        <p class="description">Focused on building modern, fast, and scalable web applications from Front-end architecture to seamless Back-end integration to deliver optimal digital solutions.</p>
+
+                        <a href="#portfolio" class="cta-button">
+                            Portofolio
+                            <img src="./assets/images/arrow.png" alt="" class="cta-arrow">
+                        </a>
+
+                    </div>
+
+                    <div class="hero-image-wrapper">
+
+                        <div id="scene">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+
+            <section id="portfolio" class="portfolio-section">
+
+
+                <div class="main-container reveal show">
+
+                    <div class="left-section reveal-left delay1 show">
+
+                        <div class="phone">
+                            <img src="./assets/images/phone-instagram.png" alt="Phone Preview" class="phone-image">
+                        </div>
+
+                    </div>
+
+                    <div class="right-section reveal-right delay2 show">
+
+                        <h1 class="reveal delay2 show">Portfolio Design</h1>
+
+                        <div class="tabs reveal delay3 show" id="tabs"></div>
+
+                        <div class="carousel-container reveal-scale delay4 show">
+
+                            <button class="nav-btn prev-btn" onclick="move(-1)">
+                                ❮
+                            </button>
+
+                            <div class="track" id="track"></div>
+
+                            <button class="nav-btn next-btn" onclick="move(1)">
+                                ❯
+                            </button>
+
+                            <div class="portfolio-scroll-hint" id="portfolioScrollHint">
+                                Scroll <span>›› </span>
+                            </div>
+
+                        </div>
+
+                        <p class="portfolio-note reveal delay4 show">
+                            Untuk portofolio lengkap, cek Instagram
+                            <a href="https://instagram.com/gendesign.id" target="_blank">
+                                @gendesign.id
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="prices" class="pricing-section">
+
+
+                <div class="pricing-container reveal show">
+
+                    <h1 class="pricing-title reveal delay1 show">
+                        Paket <span>Harga</span>
+                    </h1>
+
+                    <p class="pricing-subtitle reveal delay2 show">
+                        Pilih Paket Harga Yang Sesuai Dengan Kebutuhan Anda!
+                    </p>
+
+                    <div class="pricing-cards">
+
+                        <!-- BASIC -->
+                        <div class="card reveal-left delay1 show">
+
+                            <div class="brand">
+                                <img src="./assets/images/logo-hitam.png" alt="GEN Logo">
+                            </div>
+
+                            <h2>Basic</h2>
+
+                            <div class="price-container">
+                                <span class="old-price">
+                                    Rp25K
+                                </span>
+
+                                <span class="price">
+                                    Rp20.000
+                                    <small>/Design</small>
+                                </span>
+                            </div>
+
+                            <button class="btn">
+                                Order Now
+                            </button>
+
+                            <ul class="specs">
+                                <li>✓ 2x Revisi</li>
+                                <li>✓ Estimasi Pengerjaan 1-2 Hari</li>
+                                <li>✓ +Rp5.000 Jika ingin pengerjaan lebih cepat</li>
+                            </ul>
+
+                        </div>
+
+                        <!-- STANDARD -->
+                        <div class="card popular reveal delay2 show"
+                            style="transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1);">
+
+                            <div class="badge">
+                                Populer
+                            </div>
+
+                            <div class="brand">
+                                <img src="./assets/images/logo-card.png" alt="GEN Logo">
+                            </div>
+
+                            <h2>Standard</h2>
+
+                            <div class="price-container">
+                                <span class="old-price">
+                                    Rp40K
+                                </span>
+
+                                <span class="price">
+                                    Rp30.000
+                                    <small>/Design</small>
+                                </span>
+                            </div>
+
+                            <button class="btn">
+                                Order Now
+                            </button>
+
+                            <ul class="specs">
+                                <li>✓ 5x Revisi</li>
+                                <li>✓ Estimasi Pengerjaan 1-2 Hari</li>
+                                <li>✓ +5.000 Jika ingin pengerjaan lebih cepat</li>
+                            </ul>
+
+                        </div>
+
+                        <!-- PREMIUM -->
+                        <div class="card reveal-right delay3 show"
+                            style="transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1);">
+
+                            <div class="brand">
+                                <img src="./assets/images/logo-hitam.png" alt="GEN Logo">
+                            </div>
+
+                            <h2>Premium</h2>
+
+                            <div class="price-container">
+                                <span class="old-price">
+                                    Rp70K
+                                </span>
+
+                                <span class="price">
+                                    Rp55.000
+                                    <small>/Design</small>
+                                </span>
+                            </div>
+
+                            <button class="btn">
+                                Order Now
+                            </button>
+
+                            <ul class="specs">
+                                <li>
+                                    ✓ Unlimited Revisi kecil
+                                    (warna, teks, dll)
+                                </li>
+
+                                <li>
+                                    ✓ Estimasi Pengerjaan 1-2 Hari
+                                </li>
+
+                                <li>
+                                    ✓ +10.000 Jika ingin pengerjaan lebih cepat
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="payment" class="contact-payment-section">
+
+                <div class="payment-container reveal show">
+
+                    <!-- Kolom Kiri -->
+                    <div class="contact-col reveal-left delay1 show">
+
+                        <h2 class="title-light reveal delay1 show" id="orderText"
+                            style="font-family: &quot;Permanent Marker&quot;;">
+                            Order?
+                        </h2>
+
+                        <h1 class="title-bold reveal delay2 show">
+                            Contact <br> Us.
+                        </h1>
+
+                        <div class="contact-buttons reveal delay3 show">
+
+                            <a href="https://instagram.com/gendesign.id" id="btn-instagram" class="contact-btn"
+                                target="_blank">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+
+                            <a href="https://wa.me/628138964075?text=Halo%20kak,%20saya%20ingin%20order%20desain%20nih."
+                                id="btn-whatsapp" class="contact-btn" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+
+                            <a href="https://discord.gg/84DdJzUvvy" id="btn-discord" class="contact-btn"
+                                target="_blank">
+                                <i class="fab fa-discord"></i>
+                                <span>Discord</span>
+                            </a>
+
+                        </div>
+
+                        <p class="instruction reveal show">
+                            CLICK SALAH SATU ICON UNTUK MEMULAI PESANAN
+                        </p>
+
+                    </div>
+
+                    <!-- Kolom Kanan -->
+                    <div class="payment-col">
+
+                        <div class="payment-card">
+
+                            <div id="testimonialWrapper" class="testimonial-wrapper">
+
+                                <div id="testimonialTrack" class="testimonial-track">
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/eighte.png" alt="eight.explorer"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">eight.explorer</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Desainnya keren banget, revisinya cepat."</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/aqill.png" alt="qil.frfr" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">qil.frfr</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"HOOLLYY SHII, thanks so much twin. berguna
+                                                banget buat bazar nanti"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/rafajago.jpg" alt="Rafa Rizqi"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Rafa Rizqi</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"responnya cepat, hasilnya sangat memuaskan. ga
+                                                nyesel sih pilih design disini"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/ghina.jpg" alt="Ghina" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Ghina</p>
+                                            <p class="testimonial-rating">★★★★</p>
+                                            <p class="testimonial-msg">"baguss hasilnyaa, pelayanannya juga ramah"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/clementdav.jpg" alt="Clementdav"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Clementdav</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Thank uuu woii, actually kerenn bgt"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/corner.jpg" alt="cornercrocs"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">cornercrocs</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Wow, bagus sekali. saya puas dengan hasil ini,
+                                                terimakasih kak!"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/scioss.png" alt="Molfordan" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Molfordan</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Kelasss kinkk. keren parah gilaa"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/nazifah.png" alt="Nazifah" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Nazifah</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"okay, thank u so much yaa. u sgt berjasa today"
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/lava.jpeg" alt="Lava Hosting"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Lava Hosting</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Sip, bagus hasilnya. terimakasih banyak ya kak"
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/eighte.png" alt="eight.explorer"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">eight.explorer</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Desainnya keren banget, revisinya cepat."</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/aqill.png" alt="qil.frfr" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">qil.frfr</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"HOOLLYY SHII, thanks so much twin. berguna
+                                                banget buat bazar nanti"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/rafajago.jpg" alt="Rafa Rizqi"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Rafa Rizqi</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"responnya cepat, hasilnya sangat memuaskan. ga
+                                                nyesel sih pilih design disini"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/ghina.jpg" alt="Ghina" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Ghina</p>
+                                            <p class="testimonial-rating">★★★★</p>
+                                            <p class="testimonial-msg">"baguss hasilnyaa, pelayanannya juga ramah"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/clementdav.jpg" alt="Clementdav"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Clementdav</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Thank uuu woii, actually kerenn bgt"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/corner.jpg" alt="cornercrocs"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">cornercrocs</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Wow, bagus sekali. saya puas dengan hasil ini,
+                                                terimakasih kak!"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/scioss.png" alt="Molfordan" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Molfordan</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Kelasss kinkk. keren parah gilaa"</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/nazifah.png" alt="Nazifah" class="testimonial-avatar"
+                                            loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Nazifah</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"okay, thank u so much yaa. u sgt berjasa today"
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="testimonial-item">
+                                        <img src="./assets/images/lava.jpeg" alt="Lava Hosting"
+                                            class="testimonial-avatar" loading="lazy">
+                                        <div class="testimonial-body">
+                                            <p class="testimonial-name">Lava Hosting</p>
+                                            <p class="testimonial-rating">★★★★★</p>
+                                            <p class="testimonial-msg">"Sip, bagus hasilnya. terimakasih banyak ya kak"
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <div class="cursor-dot" style="left: 1155px; top: 3px;"></div>
+            <div class="cursor-ring" style="left: 1155px; top: 3px;">
+                <span class="cursor-text"></span>
+            </div>
+
+            <script src="./assets/js/lenis.min.js"></script>
+            <script src="./assets/js/script.js"></script>
+            <script src="./assets/js/lanyard.js"></script>
+            <script src="./assets/js/index.js"></script>
+
+            <footer class="footer">
+
+                <div class="footer-brand">
+
+                    <img src="./assets/images/skill.png" class="footer-logo">
+
+                    <p class="footer-desc">
+                        Saya ahli dalam Photoshop, mahir CapCut, dan familiar VS Code — menghasilkan konten visual
+                        profesional.
+
+                    </p>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>About</h3>
+
+                    <a href="#">Home</a>
+                    <a href="#">Portfolio</a>
+                    <a href="#">Prices</a>
+                    <a href="#">Testimoni</a>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>Services</h3>
+
+                    <a href="#">Logo Design</a>
+                    <a href="#">Banner</a>
+                    <a href="#">Poster</a>
+                    <a href="#">and others</a>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>Social</h3>
+
+                    <a href="#">Instagram</a>
+                    <a href="#">WhatsApp</a>
+                    <a href="#">Discord</a>
+
+                </div>
+
+
+
+                <div class="footer-bottom">
+                    © 2026 Muhammad Gigen Avicenna. All Rights Reserved.
+                </div>
+
+            </footer>
+
+            <script>
+                function initHeroScript() {
+                    const number = document.getElementById("loading-number");
+                    const fill = document.getElementById("loading-fill");
+                    const loaderEl = document.querySelector(".loader");
+                    const introTagline = document.getElementById("intro-tagline");
+                    const introLogo = document.getElementById("intro-logo");
+                    const intro = document.getElementById("intro") || document.querySelector(".intro");
+
+                    function startMainFeatures() {
+                        if (typeof window.startLanyard === "function") {
+                            window.startLanyard();
+                        }
+                        initTypewriter();
+                    }
+
+                    if (!number || !fill) {
+                        startMainFeatures();
+                        return;
+                    }
+
+                    let progress = 0;
+                    const loader = setInterval(() => {
+                        progress++;
+                        if (number) number.textContent = progress + "%";
+                        if (fill) fill.style.width = progress + "%";
+
+                        if (progress >= 100) {
+                            clearInterval(loader);
+                            setTimeout(() => {
+                                if (loaderEl) loaderEl.style.opacity = "0";
+                                if (introTagline) introTagline.classList.add("show");
+                                setTimeout(() => {
+                                    if (introTagline) introTagline.classList.add("hide");
+                                }, 1600);
+                                setTimeout(() => {
+                                    if (introLogo) introLogo.classList.add("show");
+                                }, 2400);
+                                setTimeout(() => {
+                                    if (introLogo && document.getElementById("navbar-logo")) {
+                                        const logoRect = introLogo.getBoundingClientRect();
+                                        const navRect = document.getElementById("navbar-logo").getBoundingClientRect();
+                                        const x = navRect.left - logoRect.left;
+                                        const y = navRect.top - logoRect.top;
+                                        introLogo.style.transition = "transform 1s cubic-bezier(.22,1,.36,1), opacity .4s ease";
+                                        introLogo.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(.25)`;
+                                    }
+                                }, 3900);
+                                setTimeout(() => {
+                                    if (intro) {
+                                        intro.style.transition = "opacity .55s ease";
+                                        intro.style.opacity = "0";
+                                    }
+                                }, 4100);
+                                setTimeout(() => {
+                                    document.body.classList.remove("intro-active");
+                                    const navLogo = document.getElementById("navbar-logo");
+                                    if (navLogo) {
+                                        navLogo.classList.add("logo-glow");
+                                        setTimeout(() => navLogo.classList.remove("logo-glow"), 700);
+                                    }
+                                    if (intro) intro.remove();
+                                    startMainFeatures();
+                                }, 4500);
+                            }, 300);
+                        }
+                    }, 18);
+                }
+
+                function initTypewriter() {
+                    const description = document.querySelector(".description");
+                    if (!description) return;
+                    const texts = [
+                        "Focused on building modern, fast, and scalable web applications from Front-end architecture to seamless Back-end integration to deliver optimal digital solutions.",
+                        "Transforming complex business concepts into high-performance interactive web applications with clean, secure, and maintainable code standards."
+                    ];
+                    let currentText = 0;
+                    function typeText() {
+                        const text = texts[currentText];
+                        let i = 0;
+                        description.textContent = "";
+                        function typing() {
+                            if (i < text.length) {
+                                description.textContent += text.charAt(i);
+                                i++;
+                                setTimeout(typing, 15);
+                            } else {
+                                setTimeout(deleteText, 5000);
+                            }
+                        }
+                        function deleteText() {
+                            if (i > 0) {
+                                i--;
+                                description.textContent = text.substring(0, i);
+                                setTimeout(deleteText, 8);
+                            } else {
+                                currentText = (currentText + 1) % texts.length;
+                                setTimeout(typeText, 350);
+                            }
+                        }
+                        typing();
+                    }
+                    typeText();
+                }
+
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", initHeroScript);
+                } else {
+                    initHeroScript();
+                }
+            </script>
+
+            <div class="bottom-vignette"></div>
+
+
+
+        </section>
+    </section>
+</body>
+
+</html>
