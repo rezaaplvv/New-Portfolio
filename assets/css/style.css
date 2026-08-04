@@ -219,9 +219,9 @@ body::after{
 }
 
 .nav-logo{
-    height:46px;
+    height:52px;
     width:auto;
-    transform:scale(1.18);
+    transform:scale(1.35);
     transform-origin:left center;
     image-rendering:-webkit-optimize-contrast;
     animation:logoFloat 4s ease-in-out infinite;
