@@ -218,7 +218,7 @@ body::after{
 }
 
 .nav-logo{
-    height:48px;
+    height:68px;
     width:auto;
     animation:logoFloat 4s ease-in-out infinite;
 }
