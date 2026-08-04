@@ -368,6 +368,17 @@ hoverTargets.forEach(item => {
     });
 });
 
+/* Scroll State Guard for Audio Performance */
+let isScrollingState = false;
+let scrollStateTimeout;
+window.addEventListener("scroll", () => {
+    isScrollingState = true;
+    clearTimeout(scrollStateTimeout);
+    scrollStateTimeout = setTimeout(() => {
+        isScrollingState = false;
+    }, 150);
+}, { passive: true });
+
 /* Hover Sound Effects */
 const soundClick = new Audio("./assets/sound/click.mp3");
 const soundSwipe = new Audio("./assets/sound/swipe.mp3");
@@ -375,7 +386,7 @@ soundClick.volume = 0.35;
 soundSwipe.volume = 0.45;
 
 function playSound(audio) {
-    if (!audio) return;
+    if (!audio || isScrollingState) return;
     try {
         audio.currentTime = 0;
         const p = audio.play();

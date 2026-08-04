@@ -22,17 +22,12 @@
 }
 
 html {  
-    scroll-behavior: smooth;
-    /* Ubah agar tidak memaksa kaku */
-    scroll-snap-type: y proximity; 
-    /* Izinkan aksi gulir sentuh */
+    scroll-behavior: auto;
     touch-action: pan-y pinch-zoom;
 }   
 
 section {
-    scroll-snap-align: start;
-    /* HAPUS sepenuhnya baris ini — ini penyebab utama macet */
-    /* scroll-snap-stop: always; */
+    scroll-snap-align: none;
 }      
 
 html,
@@ -40,13 +35,10 @@ body{
     width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
-    /* Pastikan gulir vertikal AKTIF */
     overflow-y: auto;
-    scroll-behavior: smooth;
     position: relative;
-    /* Izinkan interaksi sentuh */
     touch-action: pan-y;
-    -webkit-overflow-scrolling: touch; /* Penting untuk kelancaran di HP/tablet */
+    -webkit-overflow-scrolling: touch;
 }
 
 body::-webkit-scrollbar{
