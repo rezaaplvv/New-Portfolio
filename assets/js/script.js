@@ -387,13 +387,13 @@ function playSound(audio) {
 
 document.querySelectorAll(".nav-links a").forEach(menu => {
     menu.addEventListener("mouseenter", () => {
-        playSound(soundClick);
+        playSound(soundSwipe);
     });
 });
 
 document.querySelectorAll(".social-tag").forEach(btn => {
     btn.addEventListener("mouseenter", () => {
-        playSound(soundSwipe);
+        playSound(soundClick);
     });
 });
 
