@@ -701,8 +701,9 @@
                                         const navRect = document.getElementById("navbar-logo").getBoundingClientRect();
                                         const x = navRect.left - logoRect.left;
                                         const y = navRect.top - logoRect.top;
+                                        const scale = logoRect.height > 0 ? (navRect.height / logoRect.height) : 0.25;
                                         introLogo.style.transition = "transform 1s cubic-bezier(.22,1,.36,1), opacity .4s ease";
-                                        introLogo.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(.25)`;
+                                        introLogo.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
                                     }
                                 }, 3900);
                                 setTimeout(() => {
