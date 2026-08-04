@@ -434,14 +434,14 @@ body::after{
         #161616
     );
 
-    padding:0 60px;
+    padding:0 50px 0 95px;
 
     border-radius:50px;
 
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:60px;
+    gap:65px;
 
     overflow:hidden;
 
