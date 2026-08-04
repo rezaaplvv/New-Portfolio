@@ -310,7 +310,13 @@
 
     .hero-navbar .nav-logo {
 
-        height: 34px;
+        height: 38px;
+
+        transform: scale(1.1);
+
+        transform-origin: left center;
+
+        image-rendering: -webkit-optimize-contrast;
 
     }
 
