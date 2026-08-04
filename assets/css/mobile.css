@@ -6,498 +6,493 @@
 
 =================================================== */
 
-@media screen and (max-width:768px){
+@media screen and (max-width:768px) {
 
-    
+
 
     /* ===========================
        BODY
     =========================== */
-    
+
     /* ==========================================
    GLOBAL MOBILE FIX
 ========================================== */
 
-html{
+    html {
 
-    width:100%;
+        width: 100%;
 
-    overflow-x:hidden !important;
+        overflow-x: hidden !important;
 
-    overflow-y:auto !important;
+        overflow-y: auto !important;
 
-    scroll-behavior:smooth;
+        scroll-behavior: smooth;
 
-    scroll-snap-type:none !important;
+        scroll-snap-type: none !important;
 
-}
+    }
 
-body{
+    body {
 
-    width:100%;
+        width: 100%;
 
-    min-height:100vh;
+        min-height: 100vh;
 
-    overflow-x:hidden !important;
+        overflow-x: hidden !important;
 
-    overflow-y:auto !important;
+        overflow-y: auto !important;
 
-}
+    }
 
-section{
+    section {
 
-    width:100%;
+        width: 100%;
 
-    max-width:100%;
+        max-width: 100%;
 
-    overflow:hidden;
+        overflow: hidden;
 
-    scroll-snap-align:none !important;
+        scroll-snap-align: none !important;
 
-    scroll-snap-stop:normal !important;
+        scroll-snap-stop: normal !important;
 
-}
+    }
 
-:root{
+    :root {
 
-    /* ukuran gambar portfolio di mobile, dipakai bareng
+        /* ukuran gambar portfolio di mobile, dipakai bareng
        di .slide img dan .carousel-container biar selalu sinkron */
 
-    --slide-w: clamp(280px, 92vw, 400px);
+        --slide-w: clamp(280px, 92vw, 400px);
 
-}
+    }
 
-/* Section portfolio butuh overflow visible supaya gambar phone
+    /* Section portfolio butuh overflow visible supaya gambar phone
    bisa membesar bebas keluar dari batas container tanpa terpotong.
    Batas horizontal tetap aman karena html & body sudah overflow-x:hidden */
 
-#portfolio{
+    #portfolio {
 
-    overflow:visible;
+        overflow: visible;
 
-}
+    }
 
-/* ==========================================
+    /* ==========================================
    UNIVERSAL FIX
 ========================================== */
 
-*{
+    * {
 
-    max-width:100%;
+        max-width: 100%;
 
-}
+    }
 
-img{
+    img {
 
-    max-width:100%;
+        max-width: 100%;
 
-    height:auto;
+        height: auto;
 
-    display:block;
+        display: block;
 
-}
+    }
 
-canvas{
+    canvas {
 
-    max-width:100%;
+        max-width: 100%;
 
-}
+    }
 
-video{
+    video {
 
-    max-width:100%;
+        max-width: 100%;
 
-}
+    }
 
-svg{
+    svg {
 
-    max-width:100%;
+        max-width: 100%;
 
-}
+    }
 
-/* ==========================================
+    /* ==========================================
    FLEX FIX
 ========================================== */
 
-.container,
-.main-container,
-.pricing-container,
-.contact-payment-section .container{
+    .container,
+    .main-container,
+    .pricing-container,
+    .contact-payment-section .container {
 
-    width:100%;
+        width: 100%;
 
-    max-width:100%;
+        max-width: 100%;
 
-    margin:0 auto;
+        margin: 0 auto;
 
-}
+    }
 
-/* ==========================================
+    /* ==========================================
    HARD RESET
 ========================================== */
 
-.left-section,
-.right-section,
-.contact-col,
-.payment-col{
+    .left-section,
+    .right-section,
+    .contact-col,
+    .payment-col {
 
-    margin:0 !important;
+        margin: 0 !important;
 
-    left:auto !important;
+        left: auto !important;
 
-    right:auto !important;
+        right: auto !important;
 
-    top:auto !important;
+        top: auto !important;
 
-    bottom:auto !important;
+        bottom: auto !important;
 
-}
+    }
 
-/* ==========================================
+    /* ==========================================
    DISABLE DESKTOP OFFSET
 ========================================== */
 
-.phone-image{
+    .phone-image {
 
-    left:0 !important;
+        left: 0 !important;
 
-}
+    }
 
-.payment-card{
+    .payment-card {
 
-    margin:0 !important;
+        margin: 0 !important;
 
-}
+    }
 
-.hero-image-wrapper{
+    .hero-image-wrapper {
 
-    margin:0 auto;
+        margin: 0 auto;
 
-}
+    }
 
-/* ==========================================
+    /* ==========================================
    PREVENT HORIZONTAL SCROLL
 ========================================== */
 
-body *{
+    body * {
 
-    box-sizing:border-box;
+        box-sizing: border-box;
 
-}
-    
+    }
+
     /* ===========================
        INTRO
     =========================== */
 
-    #loading-number{
-        font-size:2.6rem;
-        margin-bottom:20px;
+    #loading-number {
+        font-size: 2.6rem;
+        margin-bottom: 20px;
     }
 
-    .loading-bar{
-        width:70vw;
-        max-width:280px;
+    .loading-bar {
+        width: 70vw;
+        max-width: 280px;
     }
 
-    #intro-tagline{
-        font-size:1.05rem;
-        letter-spacing:3px;
-        white-space:normal;
-        max-width:88vw;
-        padding:0 10px;
+    #intro-tagline {
+        font-size: 1.05rem;
+        letter-spacing: 3px;
+        white-space: normal;
+        max-width: 88vw;
+        padding: 0 10px;
     }
 
-    #intro-logo{
-        width:120px;
+    #intro-logo {
+        width: 120px;
     }
 
     /* ===========================
        HERO
     =========================== */
-    
-    .hero{
-        padding:0 18px;
-        margin-top:22px;
-        margin-bottom:70px;
+
+    .hero {
+        padding: 0 18px;
+        margin-top: 22px;
+        margin-bottom: 70px;
     }
-    
-    .container{
-    
-        width:100%;
-        height:auto;
-    
-        min-height:980px;
-    
+
+    .container {
+
+        width: 100%;
+        height: auto;
+
+        min-height: 980px;
+
         padding:
-    
-        45px
-        28px
-        45px;
-    
-        border-radius:34px;
-    
-        display:flex;
-        flex-direction:column;
-    
-        justify-content:flex-start;
-        align-items:center;
-    
-        gap:32px;
-    
-        overflow:hidden;
-    
-        position:relative;
+
+            45px 28px 45px;
+
+        border-radius: 34px;
+
+        display: flex;
+        flex-direction: column;
+
+        justify-content: flex-start;
+        align-items: center;
+
+        gap: 32px;
+
+        overflow: hidden;
+
+        position: relative;
     }
-    
+
     /* ===========================
        NAVBAR
     =========================== */
 
-    .mobile-menu-btn{
+    .mobile-menu-btn {
 
-        display:flex;
-        
-        flex-direction:column;
-        
-        justify-content:center;
-        
-        gap:6px;
-        
-        width:48px;
-        
-        height:48px;
-        
-        background:none;
-        
-        border:none;
-        
-        padding:0;
-        
-        }
-        
-        .mobile-menu-btn span{
-        
-        width:30px;
-        
-        height:3px;
-        
-        background:#fff;
-        
-        border-radius:999px;
-        
-        display:block;
-        
-        }
-    
-    .hero-navbar{
-    
-        margin:0 18px;
-    
-        padding:
-    
-        18px
-        22px;
-    
-        border-radius:28px;
-    
-        display:flex;
-    
-        align-items:center;
-    
-        justify-content:space-between;
+        display: flex;
 
-        position:relative;
+        flex-direction: column;
 
-        z-index:200;
+        justify-content: center;
+
+        gap: 6px;
+
+        width: 48px;
+
+        height: 48px;
+
+        background: none;
+
+        border: none;
+
+        padding: 0;
+
     }
-    
-    .hero-navbar .nav-logo{
-    
-        height:48px;
-    
+
+    .mobile-menu-btn span {
+
+        width: 30px;
+
+        height: 3px;
+
+        background: #fff;
+
+        border-radius: 999px;
+
+        display: block;
+
     }
-    
+
+    .hero-navbar {
+
+        margin: 0 18px;
+
+        padding: 0 20px;
+
+        height: 54px;
+
+        border-radius: 28px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        position: relative;
+
+        z-index: 200;
+    }
+
+    .hero-navbar .nav-logo {
+
+        height: 34px;
+
+    }
+
     /* sembunyikan menu desktop */
-    
-    .hero-navbar .nav-links{
-    
-        display:none;
-    
+
+    .hero-navbar .nav-links {
+
+        display: none;
+
     }
 
-    .hero-navbar .nav-links.show{
+    .hero-navbar .nav-links.show {
 
-        display:flex;
+        display: flex;
 
-        flex-direction:column;
+        flex-direction: column;
 
-        align-items:flex-start;
+        align-items: flex-start;
 
-        gap:18px;
+        gap: 18px;
 
-        position:absolute;
+        position: absolute;
 
-        top:calc(100% + 12px);
+        top: calc(100% + 12px);
 
-        left:18px;
+        left: 18px;
 
-        right:18px;
+        right: 18px;
 
-        width:auto;
+        width: auto;
 
-        padding:22px 26px;
+        padding: 22px 26px;
 
-        border-radius:24px;
+        border-radius: 24px;
 
         background:
-        linear-gradient(
-            145deg,
-            #403f3f,
-            #1a1a1a
-        );
+            linear-gradient(145deg,
+                #403f3f,
+                #1a1a1a);
 
-        border:1px solid rgba(255,255,255,.08);
+        border: 1px solid rgba(255, 255, 255, .08);
 
-        box-shadow:0 20px 45px rgba(0,0,0,.45);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, .45);
 
-        z-index:500;
+        z-index: 500;
 
     }
-    
-    .hero-navbar .social-tag{
-    
-        display:none;
-    
+
+    .hero-navbar .social-tag {
+
+        display: none;
+
     }
-    
+
     /* ===========================
        HERO IMAGE
     =========================== */
-    
-    .hero-image-wrapper{
-    
-        width:100%;
-    
-        height:570px;
-    
-        display:flex;
-    
-        justify-content:center;
-    
-        align-items:flex-start;
-    
-        margin-top:-100px;
-    
-        position:relative;
-    
+
+    .hero-image-wrapper {
+
+        width: 100%;
+
+        height: 570px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+
+        margin-top: -100px;
+
+        position: relative;
+
     }
-    
-    #scene{
-    
-        width:100%;
-        height:100%;
-    
+
+    #scene {
+
+        width: 100%;
+        height: 100%;
+
     }
-    
-    #lanyardCanvas{
-    
-        width:100%;
-        height:100%;
-    
+
+    #lanyardCanvas {
+
+        width: 100%;
+        height: 100%;
+
     }
-    
+
     /* ===========================
        HERO TEXT
     =========================== */
-    
-    .hero-text{
-    
-        width:100%;
-    
-        text-align:left;
-    
-        align-items:flex-start;
-    
-        z-index:100;
-    
+
+    .hero-text {
+
+        width: 100%;
+
+        text-align: left;
+
+        align-items: flex-start;
+
+        z-index: 100;
+
     }
-    
-    .greeting{
-    
-        font-size:20px;
-    
-        margin-bottom:6px;
-    
+
+    .greeting {
+
+        font-size: 20px;
+
+        margin-bottom: 6px;
+
     }
-    
-    .hero-text h1{
-    
-        font-size:57px;
-    
-        line-height:.95;
-    
-        letter-spacing:-2px;
-    
-        margin-bottom:18px;
-    
+
+    .hero-text h1 {
+
+        font-size: 57px;
+
+        line-height: .95;
+
+        letter-spacing: -2px;
+
+        margin-bottom: 18px;
+
     }
-    
-    .description{
-    
-        font-size:16px;
-    
-        line-height:1.8;
-    
-        max-width:100%;
-    
-        min-height:230px;
-    
-        margin-bottom:34px;
-    
+
+    .description {
+
+        font-size: 16px;
+
+        line-height: 1.8;
+
+        max-width: 100%;
+
+        min-height: 230px;
+
+        margin-bottom: 34px;
+
     }
-    
+
     /* ===========================
        BUTTON
     =========================== */
-    
-    .cta-button{
-    
-        width:100%;
-    
-        height:62px;
-    
-        border-radius:999px;
-    
-        justify-content:center;
-    
-        font-size:19px;
-    
+
+    .cta-button {
+
+        width: 100%;
+
+        height: 62px;
+
+        border-radius: 999px;
+
+        justify-content: center;
+
+        font-size: 19px;
+
     }
-    
-    .cta-arrow{
-    
-        width:20px;
-        height:20px;
-    
+
+    .cta-arrow {
+
+        width: 20px;
+        height: 20px;
+
     }
-    
+
     /* ===========================
        STICKY NAVBAR
     =========================== */
-    
-    .sticky-navbar{
 
-        display:flex;
+    .sticky-navbar {
 
-        align-items:center;
+        display: flex;
 
-        justify-content:space-between;
+        align-items: center;
 
-        left:18px;
+        justify-content: space-between;
 
-        right:18px;
+        left: 18px;
 
-        padding:14px 20px;
+        right: 18px;
+
+        padding: 14px 20px;
 
     }
 
@@ -505,41 +500,41 @@ body *{
        menyesuaikan ukuran sticky navbar yang lebih ringkas
        dari navbar hero. Style tetap sama, cuma diperkecil. */
 
-    .sticky-menu-btn{
+    .sticky-menu-btn {
 
-        width:34px;
+        width: 34px;
 
-        height:34px;
+        height: 34px;
 
-        gap:5px;
-
-    }
-
-    .sticky-menu-btn span{
-
-        width:22px;
-
-        height:2px;
+        gap: 5px;
 
     }
 
-    .sticky-navbar .nav-logo{
+    .sticky-menu-btn span {
 
-        height:26px;
+        width: 22px;
+
+        height: 2px;
+
+    }
+
+    .sticky-navbar .nav-logo {
+
+        height: 26px;
 
     }
 
     /* sembunyikan tag sosmed & menu desktop, sama seperti navbar hero */
 
-    .sticky-navbar .social-tag{
+    .sticky-navbar .social-tag {
 
-        display:none;
+        display: none;
 
     }
 
-    .sticky-navbar .nav-links{
+    .sticky-navbar .nav-links {
 
-        display:none;
+        display: none;
 
     }
 
@@ -547,36 +542,36 @@ body *{
        PORTFOLIO
     =========================== */
 
-    .main-container{
-        flex-direction:column;
-        align-items:stretch;
-        gap:30px;
-        overflow:visible;
+    .main-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 30px;
+        overflow: visible;
     }
 
-    .left-section{
-        width:100% !important;
-        max-width:none !important;
-        display:flex;
-        justify-content:center;
-        overflow:visible;
+    .left-section {
+        width: 100% !important;
+        max-width: none !important;
+        display: flex;
+        justify-content: center;
+        overflow: visible;
     }
 
-    .right-section{
+    .right-section {
 
-        width:100%;
+        width: 100%;
 
     }
 
-    .phone{
+    .phone {
 
-        width:100%;
+        width: 100%;
 
-        display:flex;
+        display: flex;
 
-        justify-content:center;
+        justify-content: center;
 
-        overflow:visible;
+        overflow: visible;
 
     }
 
@@ -585,36 +580,36 @@ body *{
        tampil lebih besar. Aman dari scrollbar horizontal karena
        html & body tetap overflow-x:hidden. */
 
-    .phone-image{
-        width:132vw !important;
-        max-width:none !important;
-        position:relative;
-        z-index:2;
+    .phone-image {
+        width: 132vw !important;
+        max-width: none !important;
+        position: relative;
+        z-index: 2;
     }
 
-    .right-section h1{
+    .right-section h1 {
 
-        font-size:2.4rem;
+        font-size: 2.4rem;
 
-        text-align:center;
-
-    }
-
-    .tabs{
-
-        justify-content:center;
-
-        flex-wrap:wrap;
-
-        gap:10px;
+        text-align: center;
 
     }
 
-    .tab-btn{
+    .tabs {
 
-        padding:10px 20px;
+        justify-content: center;
 
-        font-size:15px;
+        flex-wrap: wrap;
+
+        gap: 10px;
+
+    }
+
+    .tab-btn {
+
+        padding: 10px 20px;
+
+        font-size: 15px;
 
     }
 
@@ -626,23 +621,23 @@ body *{
        sistem yang sama kayak testimonial (slide digandain +
        posisi di-reset biar keliatan nyambung terus). */
 
-       .carousel-container{
-        height:auto;
-        overflow-x:auto;
-        overflow-y:hidden;
-        -webkit-overflow-scrolling:touch;
-        scroll-behavior:smooth;
-        scrollbar-width:none;
-    
+    .carousel-container {
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+
         /* Full-bleed tetap dipertahankan */
-        width:100vw;
-        max-width:100vw;
-        position:relative;
-        left:50%;
-        right:auto;
-        margin-left:-50vw;
-        margin-right:0;
-    
+        width: 100vw;
+        max-width: 100vw;
+        position: relative;
+        left: 50%;
+        right: auto;
+        margin-left: -50vw;
+        margin-right: 0;
+
         /* Tambahan agar TIDAK TERLIHAT secara visual */
         background: transparent !important;
         border: none !important;
@@ -652,17 +647,18 @@ body *{
         background-color: transparent !important;
         /* Pastikan tidak ada warna dari lapisan lain */
         mix-blend-mode: normal;
-        opacity: 1; /* Jangan 0, nanti isinya juga hilang */
+        opacity: 1;
+        /* Jangan 0, nanti isinya juga hilang */
         visibility: visible;
     }
-    
-    .carousel-container::-webkit-scrollbar{
-        display:none;
-    }
-    
-    .right-section{
 
-        overflow:visible;
+    .carousel-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .right-section {
+
+        overflow: visible;
 
     }
 
@@ -670,17 +666,17 @@ body *{
        padding kiri-kanan sengaja dibikin biar gambar paling
        ujung tetap keliatan "ngintip" persis kayak referensi */
 
-    .track{
+    .track {
 
-        display:flex;
+        display: flex;
 
-        align-items:center;
+        align-items: center;
 
-        gap:14px;
+        gap: 14px;
 
-        width:max-content;
+        width: max-content;
 
-        padding:8px 14vw;
+        padding: 8px 14vw;
 
     }
 
@@ -688,63 +684,63 @@ body *{
        prev/next) supaya di mobile semua slide jadi flex item
        statis yang natural buat discroll manual */
 
-    .slide{
+    .slide {
 
-        position:relative !important;
+        position: relative !important;
 
-        top:auto !important;
-        left:auto !important;
+        top: auto !important;
+        left: auto !important;
 
-        transform:none !important;
+        transform: none !important;
 
-        flex:0 0 auto;
+        flex: 0 0 auto;
 
-        opacity:1 !important;
-        filter:none !important;
-        z-index:1 !important;
+        opacity: 1 !important;
+        filter: none !important;
+        z-index: 1 !important;
 
-        scroll-snap-align:center;
+        scroll-snap-align: center;
 
     }
 
     .slide.active,
     .slide.prev,
-    .slide.next{
+    .slide.next {
 
-        transform:none !important;
-        opacity:1 !important;
-        filter:none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
 
     }
 
-    .carousel-container{
+    .carousel-container {
 
         /* proximity, bukan mandatory - biar auto-scroll pelan
            gak "digigit"/dipatahin snapping tiap frame. Snap
            tetap kerasa waktu discroll manual dan berhenti */
-        scroll-snap-type:x proximity;
+        scroll-snap-type: x proximity;
 
     }
 
-    .slide img{
+    .slide img {
 
-        width:var(--slide-w);
+        width: var(--slide-w);
 
-        height:auto;
+        height: auto;
 
-        aspect-ratio:340 / 460;
+        aspect-ratio: 340 / 460;
 
-        border-radius:30px;
+        border-radius: 30px;
 
-        cursor:pointer;
+        cursor: pointer;
 
     }
 
     /* Panah carousel gausah dipake lagi di mobile */
 
-    .nav-btn{
+    .nav-btn {
 
-        display:none;
+        display: none;
 
     }
 
@@ -752,102 +748,110 @@ body *{
        waktu awal buka, kasih tau kalau gambar bisa digeser
        tangan (loop kiri-kanan), lalu ilang begitu discroll */
 
-    .portfolio-scroll-hint{
+    .portfolio-scroll-hint {
 
-        display:flex;
-        align-items:center;
-        gap:4px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
 
-        position:absolute;
+        position: absolute;
 
-        right:6vw;
-        bottom:14px;
+        right: 6vw;
+        bottom: 14px;
 
-        z-index:5;
+        z-index: 5;
 
-        padding:8px 16px;
+        padding: 8px 16px;
 
-        font-size:.8rem;
-        font-weight:600;
-        letter-spacing:.5px;
-        color:var(--white);
+        font-size: .8rem;
+        font-weight: 600;
+        letter-spacing: .5px;
+        color: var(--white);
 
-        background:rgba(20,20,20,.55);
-        backdrop-filter:blur(8px);
-        -webkit-backdrop-filter:blur(8px);
+        background: rgba(20, 20, 20, .55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
 
-        border:1px solid rgba(255,255,255,.15);
-        border-radius:100px;
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 100px;
 
-        pointer-events:none;
+        pointer-events: none;
 
-        opacity:1;
-        transform:translateY(0);
+        opacity: 1;
+        transform: translateY(0);
 
         transition:
             opacity .5s ease,
             transform .5s ease;
 
         animation:
-            portfolioScrollHintNudge
-            1.3s
-            ease-in-out
-            infinite;
+            portfolioScrollHintNudge 1.3s ease-in-out infinite;
 
     }
 
-    .portfolio-scroll-hint.hide{
+    .portfolio-scroll-hint.hide {
 
-        opacity:0;
-        transform:translateY(8px);
+        opacity: 0;
+        transform: translateY(8px);
 
     }
 
-    .portfolio-scroll-hint span{
+    .portfolio-scroll-hint span {
 
-        display:inline-block;
+        display: inline-block;
 
         animation:
-            portfolioScrollHintArrow
-            1.3s
-            ease-in-out
-            infinite;
+            portfolioScrollHintArrow 1.3s ease-in-out infinite;
 
     }
 
 
-    @keyframes portfolioScrollHintNudge{
+    @keyframes portfolioScrollHintNudge {
 
-        0%, 100%{ transform:translateX(0); }
-        50%{ transform:translateX(-6px); }
-
-    }
-
-    @keyframes portfolioScrollHintArrow{
-
-        0%, 100%{ opacity:1; transform:translateX(0); }
-        50%{ opacity:.4; transform:translateX(4px); }
-
-    }
-
-    }
-
-    @media (min-width:769px){
-
-        .mobile-menu-btn{
-        
-        display:none;
-        
-        }
-        
+        0%,
+        100% {
+            transform: translateX(0);
         }
 
-@media screen and (max-width:768px){
+        50% {
+            transform: translateX(-6px);
+        }
+
+    }
+
+    @keyframes portfolioScrollHintArrow {
+
+        0%,
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        50% {
+            opacity: .4;
+            transform: translateX(4px);
+        }
+
+    }
+
+}
+
+@media (min-width:769px) {
+
+    .mobile-menu-btn {
+
+        display: none;
+
+    }
+
+}
+
+@media screen and (max-width:768px) {
 
     .cursor-dot,
-    .cursor-ring{
+    .cursor-ring {
 
-        display:none;
+        display: none;
 
     }
 
@@ -855,81 +859,81 @@ body *{
        PRICING
     =========================== */
 
-    .pricing-container{
+    .pricing-container {
 
-        padding:40px 16px 50px;
-
-    }
-
-    .pricing-title{
-
-        font-size:2.4rem;
-
-        letter-spacing:-1px;
+        padding: 40px 16px 50px;
 
     }
 
-    .pricing-subtitle{
+    .pricing-title {
 
-        font-size:1.05rem;
+        font-size: 2.4rem;
 
-        padding:0 6px;
-
-    }
-
-    .pricing-cards{
-
-        gap:20px;
+        letter-spacing: -1px;
 
     }
 
-    .card{
+    .pricing-subtitle {
 
-        padding:26px 22px;
+        font-size: 1.05rem;
 
-        min-height:auto;
-
-    }
-
-    .card h2{
-
-        font-size:2.3rem;
-
-        margin-bottom:22px;
+        padding: 0 6px;
 
     }
 
-    .price-container{
+    .pricing-cards {
 
-        margin-bottom:22px;
-
-    }
-
-    .price{
-
-        font-size:2rem;
+        gap: 20px;
 
     }
 
-    .specs{
+    .card {
 
-        margin-top:22px;
+        padding: 26px 22px;
 
-    }
-
-    .specs::before{
-
-        font-size:1.05rem;
-
-        margin-bottom:14px;
+        min-height: auto;
 
     }
 
-    .specs li{
+    .card h2 {
 
-        margin-bottom:12px;
+        font-size: 2.3rem;
 
-        font-size:0.95rem;
+        margin-bottom: 22px;
+
+    }
+
+    .price-container {
+
+        margin-bottom: 22px;
+
+    }
+
+    .price {
+
+        font-size: 2rem;
+
+    }
+
+    .specs {
+
+        margin-top: 22px;
+
+    }
+
+    .specs::before {
+
+        font-size: 1.05rem;
+
+        margin-bottom: 14px;
+
+    }
+
+    .specs li {
+
+        margin-bottom: 12px;
+
+        font-size: 0.95rem;
 
     }
 
@@ -937,198 +941,198 @@ body *{
        CONTACT & PAYMENT
     =========================== */
 
-    .contact-payment-section{
+    .contact-payment-section {
         --contact-section-padding: 50px 20px;
         --contact-btn-size: 110px;
         --contact-icon-size: 28px;
         --contact-btn-gap: 12px;
-        padding:var(--contact-section-padding);
+        padding: var(--contact-section-padding);
     }
 
-    .title-light{
+    .title-light {
 
-        font-size:3.4rem;
+        font-size: 3.4rem;
 
     }
 
-    .title-bold{
+    .title-bold {
 
-        font-size:4rem;
+        font-size: 4rem;
 
-        margin-bottom:28px;
+        margin-bottom: 28px;
 
     }
 
     .contact-payment-section .payment-container,
-    .contact-payment-section .container{
-    display:flex;
-    flex-direction:column;
-    gap:26px;
-    width:100%;
+    .contact-payment-section .container {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        width: 100%;
     }
 
-    .contact-col{
-        transform:none;
-        width:100%;
-        padding-bottom:18px;
+    .contact-col {
+        transform: none;
+        width: 100%;
+        padding-bottom: 18px;
 
     }
 
-    .payment-card{
+    .payment-card {
 
-        margin-top:25px !important;
-    
+        margin-top: 25px !important;
+
     }
 
-    .contact-buttons{
-        justify-content:center;
-        flex-wrap:nowrap;
-        gap:var(--contact-btn-gap);
-        width:100%;
+    .contact-buttons {
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: var(--contact-btn-gap);
+        width: 100%;
     }
 
-    .contact-btn{
+    .contact-btn {
 
-        width:var(--contact-btn-size);
-    
-        height:110px;
-    
-        flex:0 1 auto;
-    
-        display:flex;
-    
-        flex-direction:column;
-    
-        justify-content:center;
-    
-        align-items:center;
-    
-        gap:10px;
-    
-    }
-    
-    .contact-btn i{
+        width: var(--contact-btn-size);
 
-        font-size:var(--contact-icon-size);
-    
-        margin-bottom:8px;
-    
-    }
-    
-    .contact-btn span{
-    
-        font-size:14px;
-    
-        line-height:1.2;
-    
-        text-align:center;
-    
+        height: 110px;
+
+        flex: 0 1 auto;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 10px;
+
     }
 
-    .instruction{
+    .contact-btn i {
 
-        margin-top:22px;
-    
-        margin-bottom:44px;
+        font-size: var(--contact-icon-size);
 
-        margin-left:-45px;
-    
-        line-height:1.6;
-    
-        font-size:15px;
-    
+        margin-bottom: 8px;
+
     }
 
-    .testimonial-wrapper{
-        height:460px;
-        border-radius:30px;
+    .contact-btn span {
+
+        font-size: 14px;
+
+        line-height: 1.2;
+
+        text-align: center;
+
     }
 
-    .testimonial-track{
-        padding:28px 22px;
-        gap:14px;
+    .instruction {
+
+        margin-top: 22px;
+
+        margin-bottom: 44px;
+
+        margin-left: -45px;
+
+        line-height: 1.6;
+
+        font-size: 15px;
+
     }
 
-    .testimonial-item{
-        padding:16px 18px;
-        border-radius:18px;
-        gap:12px;
+    .testimonial-wrapper {
+        height: 460px;
+        border-radius: 30px;
     }
 
-    .testimonial-avatar{
-        width:48px;
-        height:48px;
+    .testimonial-track {
+        padding: 28px 22px;
+        gap: 14px;
     }
 
-    .testimonial-name{
-        font-size:14px;
+    .testimonial-item {
+        padding: 16px 18px;
+        border-radius: 18px;
+        gap: 12px;
     }
 
-    .testimonial-msg{
-        font-size:13px;
+    .testimonial-avatar {
+        width: 48px;
+        height: 48px;
+    }
+
+    .testimonial-name {
+        font-size: 14px;
+    }
+
+    .testimonial-msg {
+        font-size: 13px;
     }
 
     /* ===========================
        FOOTER
     =========================== */
 
-    .footer{
+    .footer {
 
-        grid-template-columns:repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
 
-        gap:28px 20px;
+        gap: 28px 20px;
 
-        padding:40px 22px 34px;
+        padding: 40px 22px 34px;
 
-        text-align:left;
-
-    }
-
-    .footer-brand{
-
-        grid-column:1 / -1;
-
-        max-width:100%;
+        text-align: left;
 
     }
 
-    .footer-logo{
+    .footer-brand {
 
-        width:130px;
+        grid-column: 1 / -1;
 
-        margin-bottom:14px;
-
-    }
-
-    .footer-desc{
-
-        font-size:14px;
-
-        line-height:1.6;
+        max-width: 100%;
 
     }
 
-    .footer-column h3{
+    .footer-logo {
 
-        margin-bottom:14px;
+        width: 130px;
 
-        font-size:16px;
-
-    }
-
-    .footer-column a{
-
-        margin-bottom:10px;
+        margin-bottom: 14px;
 
     }
 
-    .footer-bottom{
+    .footer-desc {
 
-        margin-top:24px;
+        font-size: 14px;
 
-        padding-top:18px;
+        line-height: 1.6;
 
-        font-size:13px;
+    }
+
+    .footer-column h3 {
+
+        margin-bottom: 14px;
+
+        font-size: 16px;
+
+    }
+
+    .footer-column a {
+
+        margin-bottom: 10px;
+
+    }
+
+    .footer-bottom {
+
+        margin-top: 24px;
+
+        padding-top: 18px;
+
+        font-size: 13px;
 
     }
 
@@ -1139,21 +1143,21 @@ body *{
        on mobile GPU compositing)
     =========================== */
 
-    body .aurora span{
+    body .aurora span {
 
         /* lebar diperkecil & blur diperbesar supaya proporsional
            dengan layar sempit — mencegah tepi kotak terlihat */
 
-        display:none;
+        display: none;
 
     }
 
     /* kurangi jumlah lapisan aktif di mobile untuk mengurangi noise/overdraw */
 
     body .aurora span:nth-child(3),
-    body .aurora span:nth-child(4){
+    body .aurora span:nth-child(4) {
 
-        display:none;
+        display: none;
 
     }
 
@@ -1161,19 +1165,19 @@ body *{
        di layar sentuh — matikan agar tidak jadi elemen blur
        tambahan yang mengganggu di background */
 
-    .mouse-glow{
+    .mouse-glow {
 
-        display:none !important;
+        display: none !important;
 
     }
 
 }
 
-.pricing-section{
-    padding-bottom:30px;
+.pricing-section {
+    padding-bottom: 30px;
 }
 
-.contact-payment-section{
-    margin-top:0;
-    padding-top:20px;
+.contact-payment-section {
+    margin-top: 0;
+    padding-top: 20px;
 }

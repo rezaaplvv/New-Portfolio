@@ -181,7 +181,8 @@ body::after{
     justify-content:space-between;
     align-items:center;
 
-    padding:15px 40px;
+    height:60px;
+    padding:0 35px;
     margin:-10px 5%;
 
     background:
@@ -218,7 +219,7 @@ body::after{
 }
 
 .nav-logo{
-    height:68px;
+    height:40px;
     width:auto;
     animation:logoFloat 4s ease-in-out infinite;
 }
