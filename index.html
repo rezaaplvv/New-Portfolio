@@ -34,9 +34,9 @@
 
 
 
-<body class="intro-active">
+<body class="">
 
-    <div id="intro">
+    <div id="intro" style="display: none;">
         <div id="particles"></div>
 
         <div class="loader">
@@ -66,6 +66,10 @@
 
     </div>
 
+    <div class="glow-orb" style="transform: translate(660px, -490px);"></div>
+
+    <div class="cursor-light" style="transform: translate(805px, -347px);"></div>
+
 
 
     <section class="hero">
@@ -91,7 +95,7 @@
                 </ul>
 
                 <a href="https://wa.me/6283133387676" target="_blank" class="social-tag">
-                    <i class="fab fa-whatsapp" style="margin-right: 6px; font-size: 15px; color: #25D366;"></i>Contact Me
+                    <i class="fab fa-whatsapp" style="margin-right: 6px; font-size: 15px; color: #666;"></i>Contact Me
                 </a>
 
             </nav>
@@ -114,7 +118,7 @@
                 </ul>
 
                 <a href="https://wa.me/6283133387676" target="_blank" class="social-tag">
-                    <i class="fab fa-whatsapp" style="margin-right: 6px; font-size: 15px; color: #25D366;"></i>Contact Me
+                    <i class="fab fa-whatsapp" style="margin-right: 6px; font-size: 15px; color: #666;"></i>Contact Me
                 </a>
 
                 <div class="scroll-progress">
@@ -659,13 +663,6 @@
 
             <script>
                 function initHeroScript() {
-                    const number = document.getElementById("loading-number");
-                    const fill = document.getElementById("loading-fill");
-                    const loaderEl = document.querySelector(".loader");
-                    const introTagline = document.getElementById("intro-tagline");
-                    const introLogo = document.getElementById("intro-logo");
-                    const intro = document.getElementById("intro") || document.querySelector(".intro");
-
                     function startMainFeatures() {
                         if (typeof window.startLanyard === "function") {
                             window.startLanyard();
@@ -673,10 +670,12 @@
                         initTypewriter();
                     }
 
-                    if (!number || !fill) {
-                        startMainFeatures();
-                        return;
-                    }
+                    // // SEMENTARA MATIKAN LOADING SCREEN UNTUK DEVELOPING CEPAT
+                    document.body.classList.remove("intro-active");
+                    const introEl = document.getElementById("intro");
+                    if (introEl) introEl.remove();
+                    startMainFeatures();
+                    return;
 
                     let progress = 0;
                     const loader = setInterval(() => {
