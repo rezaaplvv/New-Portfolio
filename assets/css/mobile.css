@@ -1082,13 +1082,21 @@
        FOOTER
     =========================== */
 
+    .footer-bouncy-wrapper {
+
+        height: 100px;
+
+        margin-top: 60px;
+
+    }
+
     .footer {
 
         grid-template-columns: repeat(2, 1fr);
 
         gap: 28px 20px;
 
-        padding: 40px 22px 34px;
+        padding: 30px 22px 34px;
 
         text-align: left;
 

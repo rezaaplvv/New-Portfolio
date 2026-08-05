@@ -468,3 +468,48 @@ stickyMenuBtn?.addEventListener("click", () => {
         target.scrollIntoView({ behavior: "smooth" });
     }
 });
+
+/* ===================================================
+   GSAP BOUNCY FOOTER ANIMATION
+=================================================== */
+function initGSAPBouncyFooter() {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    const bouncyPath = document.getElementById("bouncy-path");
+    const footerTrigger = document.querySelector(".footer-bouncy-wrapper") || document.querySelector(".footer");
+
+    if (bouncyPath && footerTrigger) {
+        ScrollTrigger.create({
+            trigger: footerTrigger,
+            start: "top bottom",
+            toggleActions: "play pause resume reverse",
+            onEnter: (self) => {
+                const velocity = self.getVelocity ? self.getVelocity() : 1000;
+                const variation = Math.min(0.7, Math.max(0.1, Math.abs(velocity) / 8000));
+
+                const anim = { y: 156 };
+                gsap.fromTo(anim, 
+                    { y: 156 }, 
+                    {
+                        y: 0,
+                        duration: 1.8,
+                        ease: `elastic.out(${1 + variation}, ${0.45 - variation * 0.2})`,
+                        overwrite: "auto",
+                        onUpdate: () => {
+                            const yVal = anim.y.toFixed(1);
+                            bouncyPath.setAttribute("d", `M0-0.3C0-0.3,464,${yVal},1139,${yVal}S2278-0.3,2278-0.3V683H0V-0.3z`);
+                        }
+                    }
+                );
+            }
+        });
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initGSAPBouncyFooter);
+} else {
+    initGSAPBouncyFooter();
+}
