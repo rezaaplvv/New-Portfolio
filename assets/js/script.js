@@ -487,15 +487,16 @@ function initGSAPBouncyFooter() {
             toggleActions: "play pause resume reverse",
             onEnter: (self) => {
                 const velocity = self.getVelocity ? self.getVelocity() : 1000;
-                const variation = Math.min(0.7, Math.max(0.1, Math.abs(velocity) / 8000));
+                const variation = Math.min(0.6, Math.max(0.15, Math.abs(velocity) / 6000));
+                const startY = 240;
 
-                const anim = { y: 156 };
+                const anim = { y: startY };
                 gsap.fromTo(anim, 
-                    { y: 156 }, 
+                    { y: startY }, 
                     {
                         y: 0,
-                        duration: 1.8,
-                        ease: `elastic.out(${1 + variation}, ${0.45 - variation * 0.2})`,
+                        duration: 3.2,
+                        ease: `elastic.out(${1.2 + variation * 0.5}, ${0.35 + variation * 0.1})`,
                         overwrite: "auto",
                         onUpdate: () => {
                             const yVal = anim.y.toFixed(1);
