@@ -488,15 +488,15 @@ function initGSAPBouncyFooter() {
             onEnter: (self) => {
                 const velocity = self.getVelocity ? self.getVelocity() : 1000;
                 const variation = Math.min(0.6, Math.max(0.15, Math.abs(velocity) / 6000));
-                const startY = 240;
+                const startY = 360;
 
                 const anim = { y: startY };
                 gsap.fromTo(anim, 
                     { y: startY }, 
                     {
                         y: 0,
-                        duration: 3.2,
-                        ease: `elastic.out(${1.2 + variation * 0.5}, ${0.35 + variation * 0.1})`,
+                        duration: 3.6,
+                        ease: `elastic.out(${1.5 + variation * 0.5}, ${0.32 + variation * 0.08})`,
                         overwrite: "auto",
                         onUpdate: () => {
                             const yVal = anim.y.toFixed(1);
