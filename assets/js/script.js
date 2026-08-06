@@ -510,7 +510,77 @@ function initGSAPBouncyFooter() {
 }
 
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initGSAPBouncyFooter);
+    document.addEventListener("DOMContentLoaded", () => {
+        initGSAPBouncyFooter();
+        initTechLogoLoop();
+    });
 } else {
     initGSAPBouncyFooter();
+    initTechLogoLoop();
+}
+
+/* ===================================================
+   REACT BITS LOGOLOOP (TECH STACK INFINITE MARQUEE)
+=================================================== */
+function initTechLogoLoop() {
+    const container = document.getElementById("techLogoLoop");
+    const track = document.getElementById("techStackTrack");
+    const origList = document.getElementById("techListOriginal");
+    if (!container || !track || !origList) return;
+
+    // 1. Auto-duplicate list copies so loop is 100% seamless without gap
+    const listWidth = origList.getBoundingClientRect().width || 1200;
+    const containerWidth = container.clientWidth || 1000;
+    const copiesNeeded = Math.max(3, Math.ceil(containerWidth / listWidth) + 2);
+
+    track.innerHTML = "";
+    for (let i = 0; i < copiesNeeded; i++) {
+        const clone = origList.cloneNode(true);
+        clone.removeAttribute("id");
+        if (i > 0) clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+    }
+
+    // 2. Infinite Loop Animation with smooth lerp physics
+    let offset = 0;
+    let velocity = 70;
+    let targetVelocity = 70;
+    let lastTime = null;
+    let isHovered = false;
+
+    container.addEventListener("mouseenter", () => {
+        isHovered = true;
+    });
+    container.addEventListener("mouseleave", () => {
+        isHovered = false;
+    });
+
+    track.querySelectorAll(".tech-card").forEach(card => {
+        card.addEventListener("mouseenter", () => {
+            if (typeof playSound === "function" && typeof soundClick !== "undefined") {
+                playSound(soundClick);
+            }
+        });
+    });
+
+    function loopStep(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        const delta = Math.max(0, timestamp - lastTime) / 1000;
+        lastTime = timestamp;
+
+        const target = isHovered ? 0 : targetVelocity;
+        const easing = 1 - Math.exp(-delta / 0.25);
+        velocity += (target - velocity) * easing;
+
+        const seqWidth = origList.getBoundingClientRect().width || 1200;
+        if (seqWidth > 0) {
+            offset += velocity * delta;
+            offset = ((offset % seqWidth) + seqWidth) % seqWidth;
+            track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+        }
+
+        requestAnimationFrame(loopStep);
+    }
+
+    requestAnimationFrame(loopStep);
 }
