@@ -3759,15 +3759,15 @@ body .aurora span:nth-child(4){
 =================================================== */
 
 .draggable-sticker {
+    /* Positioned relative to .hero (which has position:relative) */
     position: absolute;
-    top: 35px;
-    right: 45px;
+    top: 55px;
+    right: 80px;
     z-index: 90;
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
     touch-action: none;
-    /* overflow must be visible so flap can appear ABOVE */
     overflow: visible;
 }
 
