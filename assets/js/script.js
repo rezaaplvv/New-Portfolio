@@ -597,79 +597,45 @@ function initTechLogoLoop() {
 }
 
 /* ===================================================
-   SCROLL-DRIVEN STICKER PEEL (Pixel-based, Lenis-aware)
+   SCROLL-DRIVEN STICKER PEEL – polygon clip-path (% based, no height measurement)
 =================================================== */
 function initStickerPeel() {
-    const stickerEl   = document.getElementById("heroSticker");
     const containerEl = document.getElementById("stickerContainer");
     const mainEl      = containerEl?.querySelector(".sticker-main");
     const flapEl      = containerEl?.querySelector(".flap");
+    if (!containerEl || !mainEl || !flapEl) return;
 
-    console.log("[StickerPeel] init:", { stickerEl, containerEl, mainEl, flapEl });
-    if (!stickerEl || !containerEl || !mainEl || !flapEl) {
-        console.warn("[StickerPeel] Missing element, aborting.");
-        return;
-    }
-
-    const img = mainEl.querySelector("img");
-    if (!img) { console.warn("[StickerPeel] No img found."); return; }
-
-    let H = 0;
-
+    /* applyPeel drives both elements with % polygon values.
+       No px measurements, no scaleY, no height% = guaranteed cross-browser. */
     function applyPeel(scrollY) {
-        if (H <= 0) return;
-        const maxScroll = 400;
-        const t = Math.min(1, Math.max(0, scrollY / maxScroll));
+        const t    = Math.min(1, Math.max(0, scrollY / 400)); // 0 → 1
+        const peel = +(t * 60).toFixed(2);                    // 0% → 60%
 
-        const clipped  = t * H;
-        const flapClip = (1 - t) * H;
-        const flapTop  = (t - 1) * H;
+        // Main sticker: growing triangle cut from top-right corner
+        mainEl.style.clipPath =
+            `polygon(0% 0%, ${100 - peel}% 0%, 100% ${peel}%, 100% 100%, 0% 100%)`;
 
-        mainEl.style.clipPath = `inset(${clipped.toFixed(1)}px 0 0 0)`;
-        flapEl.style.clipPath = `inset(${flapClip.toFixed(1)}px 0 0 0)`;
-        flapEl.style.top      = flapTop.toFixed(1) + "px";
+        // Flap: show ONLY the triangular folded-back corner
+        flapEl.style.clipPath =
+            `polygon(${100 - peel}% 0%, 100% 0%, 100% ${peel}%)`;
     }
 
-    function startPeel() {
-        // Try multiple methods to get the rendered image height
-        const rect = img.getBoundingClientRect();
-        H = rect.height > 0 ? rect.height
-          : img.offsetHeight > 0 ? img.offsetHeight
-          : img.naturalHeight > 0 ? img.naturalHeight * (150 / (img.naturalWidth || 150))
-          : 150; // absolute fallback
+    // Init at current scroll (handle page reload mid-scroll)
+    applyPeel(window.scrollY || 0);
 
-        console.log("[StickerPeel] H =", H, "| rect:", rect, "| offsetH:", img.offsetHeight);
+    // ① Lenis scroll callback — fires every Lenis animation frame
+    if (window.lenis) {
+        window.lenis.on("scroll", ({ scroll }) => applyPeel(scroll));
+    }
 
-        containerEl.style.height = H + "px";
-        flapEl.style.height      = H + "px";
-
+    // ② Native scroll — catches non-Lenis environments
+    window.addEventListener("scroll", () => {
         applyPeel(window.scrollY || 0);
+    }, { passive: true });
 
-        // Lenis scroll callback
-        if (window.lenis) {
-            console.log("[StickerPeel] Attaching Lenis scroll listener");
-            window.lenis.on("scroll", ({ scroll }) => applyPeel(scroll));
-        } else {
-            console.warn("[StickerPeel] window.lenis not found, using native scroll");
-        }
-
-        // Native scroll fallback
-        window.addEventListener("scroll", () => {
-            applyPeel(window.scrollY || 0);
-        }, { passive: true });
-
-        // RAF loop — runs every frame, guaranteed to catch Lenis updates
-        function raf() {
-            applyPeel(window.scrollY || 0);
-            requestAnimationFrame(raf);
-        }
+    // ③ RAF loop — safety net, runs every frame regardless
+    (function raf() {
+        applyPeel(window.scrollY || 0);
         requestAnimationFrame(raf);
-    }
-
-    // Wait for full page load (window.load) to ensure layout is complete
-    if (document.readyState === "complete") {
-        startPeel();
-    } else {
-        window.addEventListener("load", startPeel, { once: true });
-    }
+    })();
 }

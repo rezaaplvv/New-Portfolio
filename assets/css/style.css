@@ -3755,36 +3755,33 @@ body .aurora span:nth-child(4){
 }
 
 /* ===================================================
-   STICKER PEEL COMPONENT (SCROLL DRIVEN)
+   STICKER PEEL COMPONENT (SCROLL DRIVEN – polygon clip-path)
 =================================================== */
 
 .draggable-sticker {
-    /* Positioned relative to .hero (which has position:relative) */
     position: absolute;
     top: 55px;
     right: 80px;
     z-index: 90;
-    cursor: default;
     user-select: none;
     -webkit-user-select: none;
-    touch-action: none;
+    pointer-events: none;  /* not draggable, purely decorative */
     overflow: visible;
 }
 
 .sticker-container {
     position: relative;
     width: 150px;
-    /* height set by JS in pixels after image renders */
     overflow: visible;
 }
 
 .sticker-main {
     position: relative;
     width: 100%;
-    /* Start fully visible - no clip */
+    z-index: 1;
+    /* clip-path driven by JS */
     will-change: clip-path;
-    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
-    overflow: visible;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
 }
 
 .sticker-image {
@@ -3794,20 +3791,16 @@ body .aurora span:nth-child(4){
     pointer-events: none;
 }
 
+/* Flap = same image, clipped to triangular folded corner shape */
 .flap {
     position: absolute;
-    width: 100%;
-    /* height set by JS in pixels (same as sticker-main img height) */
-    left: 0;
-    /* top set by JS - starts at -H (above), moves to 0 as scroll increases */
-    top: -9999px;
+    inset: 0;                    /* top/left/right/bottom: 0 */
     z-index: 2;
-    /* Flip vertically to simulate back of sticker */
-    transform: scaleY(-1);
-    transform-origin: center center;
-    /* Start fully clipped - JS drives this */
-    clip-path: inset(9999px 0 0 0);
-    will-change: clip-path, top;
+    /* No transform — polygon clip-path creates the triangle */
+    clip-path: polygon(100% 0%, 100% 0%, 100% 0%);  /* hidden initially */
+    will-change: clip-path;
+    /* Slight brightness/shadow to simulate fold */
+    filter: brightness(0.7) drop-shadow(-3px 3px 8px rgba(0,0,0,0.6));
     overflow: visible;
 }
 
@@ -3816,7 +3809,6 @@ body .aurora span:nth-child(4){
     height: auto;
     display: block;
     pointer-events: none;
-    filter: brightness(0.75) sepia(0.15) drop-shadow(0 -4px 10px rgba(0,0,0,0.4));
 }
 
 @media screen and (max-width:768px){
