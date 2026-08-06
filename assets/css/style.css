@@ -3755,31 +3755,18 @@ body .aurora span:nth-child(4){
 }
 
 /* ===================================================
-   STICKER PEEL COMPONENT (REACT BITS)
+   STICKER PEEL COMPONENT (SCROLL DRIVEN)
 =================================================== */
-
-:root {
-    --sticker-rotate: 15deg;
-    --sticker-p: 10px;
-    --sticker-peelback-hover: 30%;
-    --sticker-peelback-active: 45%;
-    --sticker-start: calc(-1 * var(--sticker-p));
-    --sticker-end: calc(100% + var(--sticker-p));
-    --sticker-shadow-opacity: 0.6;
-    --sticker-lighting-constant: 0.1;
-    --peel-direction: 0deg;
-    --sticker-width: 140px;
-}
 
 .draggable-sticker {
     position: absolute;
-    top: 30px;
+    top: 35px;
     right: 45px;
-    z-index: 80;
+    z-index: 90;
     cursor: grab;
-    transform: translateZ(0);
     user-select: none;
     -webkit-user-select: none;
+    touch-action: none;
 }
 
 .draggable-sticker:active {
@@ -3788,34 +3775,25 @@ body .aurora span:nth-child(4){
 
 .sticker-container {
     position: relative;
-    transform: rotate(var(--peel-direction));
-    transform-origin: center;
-}
-
-.sticker-container * {
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
+    width: 150px;
+    height: auto;
+    overflow: visible;
 }
 
 .sticker-main {
-    clip-path: polygon(
-        var(--sticker-start) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
-        var(--sticker-end) var(--sticker-end),
-        var(--sticker-start) var(--sticker-end)
-    );
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    clip-path: inset(0% 0 0 0);
     will-change: clip-path;
-    filter: drop-shadow(0 6px 15px rgba(0,0,0,0.4));
-}
-
-.sticker-main > * {
-    transform: rotate(calc(-1 * var(--peel-direction)));
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
 }
 
 .sticker-image {
-    transform: rotate(var(--sticker-rotate));
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
 }
 
 .flap {
@@ -3823,37 +3801,20 @@ body .aurora span:nth-child(4){
     width: 100%;
     height: 100%;
     left: 0;
-    top: calc(-100% - var(--sticker-p) - var(--sticker-p));
-    clip-path: polygon(
-        var(--sticker-start) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
-        var(--sticker-start) var(--sticker-start)
-    );
+    top: -100%;
+    z-index: 2;
     transform: scaleY(-1);
+    transform-origin: center;
+    clip-path: inset(0 0 100% 0);
     will-change: clip-path, top;
 }
 
-.flap-lighting {
-    filter: url(#pointLightFlipped);
-}
-
 .flap-image {
-    transform: rotate(var(--sticker-rotate));
-    filter: url(#expandAndFill);
-}
-
-.sticker-image,
-.flap-image {
-    width: var(--sticker-width, 140px);
+    width: 100%;
     height: auto;
     display: block;
     pointer-events: none;
-}
-
-.sticker-main,
-.flap {
-    will-change: clip-path, transform;
+    filter: brightness(0.85) contrast(1.1) drop-shadow(0 4px 10px rgba(0,0,0,0.5));
 }
 
 @media screen and (max-width:768px){

@@ -605,22 +605,19 @@ function initStickerPeel() {
         const peelObj = { pct: 0 };
 
         gsap.to(peelObj, {
-            pct: 50,
+            pct: 48,
             ease: "none",
             scrollTrigger: {
-                trigger: ".hero",
+                trigger: document.body,
                 start: "top top",
-                end: "bottom top",
-                scrub: 0.5
+                end: "450px top",
+                scrub: 0.3
             },
             onUpdate: () => {
-                const p = peelObj.pct.toFixed(1);
-                // Update clip-path on sticker-main
-                mainEl.style.clipPath = `polygon(-10px ${p}%, 110% ${p}%, 110% 110%, -10px 110%)`;
-                
-                // Update clip-path and top position on flap
-                flapEl.style.clipPath = `polygon(-10px -10px, 110% -10px, 110% ${p}%, -10px ${p}%)`;
-                flapEl.style.top = `calc(-100% + ${2 * p}% - 1px)`;
+                const P = peelObj.pct;
+                mainEl.style.clipPath = `inset(${P}% 0 0 0)`;
+                flapEl.style.clipPath = `inset(0 0 ${100 - P}% 0)`;
+                flapEl.style.top = `${2 * P - 100}%`;
             }
         });
     }

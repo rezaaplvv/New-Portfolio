@@ -132,51 +132,15 @@
 
                     <canvas id="lanyardCanvas" width="1287" height="530"></canvas>
 
-                    <!-- StickerPeel Component (React Bits) -->
+                    <!-- StickerPeel Component (React Bits Scroll Driven) -->
                     <div class="draggable-sticker" id="heroSticker">
-                        <svg width="0" height="0" style="position:absolute;">
-                            <defs>
-                                <filter id="pointLight">
-                                    <feGaussianBlur stdDeviation="1" result="blur" />
-                                    <feSpecularLighting result="spec" in="blur" specularExponent="100" specularConstant="0.1" lightingColor="white">
-                                        <fePointLight id="stickerPointLight" x="100" y="100" z="300" />
-                                    </feSpecularLighting>
-                                    <feComposite in="spec" in2="SourceGraphic" result="lit" />
-                                    <feComposite in="lit" in2="SourceAlpha" operator="in" />
-                                </filter>
-
-                                <filter id="pointLightFlipped">
-                                    <feGaussianBlur stdDeviation="10" result="blur" />
-                                    <feSpecularLighting result="spec" in="blur" specularExponent="100" specularConstant="0.7" lightingColor="white">
-                                        <fePointLight id="stickerPointLightFlipped" x="100" y="100" z="300" />
-                                    </feSpecularLighting>
-                                    <feComposite in="spec" in2="SourceGraphic" result="lit" />
-                                    <feComposite in="lit" in2="SourceAlpha" operator="in" />
-                                </filter>
-
-                                <filter id="dropShadow">
-                                    <feDropShadow dx="2" dy="4" stdDeviation="1.8" floodColor="black" floodOpacity="0.6" />
-                                </filter>
-
-                                <filter id="expandAndFill">
-                                    <feOffset dx="0" dy="0" in="SourceAlpha" result="shape" />
-                                    <feFlood floodColor="rgb(179,179,179)" result="flood" />
-                                    <feComposite operator="in" in="flood" in2="shape" />
-                                </filter>
-                            </defs>
-                        </svg>
-
                         <div class="sticker-container" id="stickerContainer">
                             <div class="sticker-main">
-                                <div class="sticker-lighting">
-                                    <img src="./assets/images/peel.png" alt="Sticker" class="sticker-image" draggable="false" oncontextmenu="return false;" />
-                                </div>
+                                <img src="./assets/images/peel.png" alt="Sticker" class="sticker-image" draggable="false" oncontextmenu="return false;" />
                             </div>
 
                             <div class="flap">
-                                <div class="flap-lighting">
-                                    <img src="./assets/images/peel.png" alt="Sticker" class="flap-image" draggable="false" oncontextmenu="return false;" />
-                                </div>
+                                <img src="./assets/images/peel.png" alt="Sticker" class="flap-image" draggable="false" oncontextmenu="return false;" />
                             </div>
                         </div>
                     </div>
