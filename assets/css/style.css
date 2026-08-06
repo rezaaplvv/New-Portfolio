@@ -3757,15 +3757,11 @@ body .aurora span:nth-child(4){
 /* ===================================================
    STICKER PEEL COMPONENT (React Bits Scroll-Driven)
 =================================================== */
-:root {
-    --peel-pct: 0%;
-}
-
 .draggable-sticker {
     position: absolute;
     top: 50px;
     right: 70px;
-    z-index: 90;
+    z-index: 9999;
     user-select: none;
     -webkit-user-select: none;
     pointer-events: none;
@@ -3778,6 +3774,7 @@ body .aurora span:nth-child(4){
     transform: rotate(-10deg);
     transform-origin: center;
     overflow: visible;
+    z-index: 9999;
 }
 
 .sticker-container * {
@@ -3789,9 +3786,7 @@ body .aurora span:nth-child(4){
     position: relative;
     width: 100%;
     z-index: 1;
-    -webkit-clip-path: polygon(0% var(--peel-pct), 100% var(--peel-pct), 100% 100%, 0% 100%);
-    clip-path: polygon(0% var(--peel-pct), 100% var(--peel-pct), 100% 100%, 0% 100%);
-    will-change: clip-path;
+    will-change: clip-path, -webkit-clip-path;
     filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
 }
 
@@ -3807,12 +3802,10 @@ body .aurora span:nth-child(4){
     width: 100%;
     height: 100%;
     left: 0;
-    top: calc(-100% + 2 * var(--peel-pct));
+    top: -100%;
     z-index: 2;
-    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% var(--peel-pct), 0% var(--peel-pct));
-    clip-path: polygon(0% 0%, 100% 0%, 100% var(--peel-pct), 0% var(--peel-pct));
     transform: scaleY(-1);
-    will-change: clip-path, top;
+    will-change: clip-path, -webkit-clip-path, top;
 }
 
 .flap-image {
