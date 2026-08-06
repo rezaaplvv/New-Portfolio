@@ -17,6 +17,15 @@ if (typeof Lenis !== "undefined") {
     }
     requestAnimationFrame(raf);
 
+    // Connect Lenis to GSAP ScrollTrigger so ScrollTrigger reads Lenis scroll position
+    if (typeof ScrollTrigger !== "undefined") {
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+    }
+
     // Smooth scroll for internal anchor links (#hero, #portfolio, #prices, #payment)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function (e) {
@@ -598,26 +607,40 @@ function initStickerPeel() {
 
     if (!stickerEl || !containerEl || !mainEl || !flapEl) return;
 
-    // 1. GSAP ScrollTrigger Scrubbing Peel Animation
+    // Helper to update clip-path
+    function applyPeel(P) {
+        mainEl.style.clipPath = `inset(${P}% 0 0 0 round 0px)`;
+        flapEl.style.clipPath = `inset(0 0 ${100 - P}% 0 round 0px)`;
+        flapEl.style.top = `${(2 * P) - 100}%`;
+    }
+
+    // Peel via raw scroll listener (works regardless of ScrollTrigger/Lenis state)
+    function onScroll() {
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        const maxScroll = 450; // pixels to complete peel
+        const P = Math.min(48, (scrollY / maxScroll) * 48);
+        applyPeel(P);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // init on load
+
+    // Also try GSAP ScrollTrigger if available (with Lenis support)
     if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
         gsap.registerPlugin(ScrollTrigger);
 
         const peelObj = { pct: 0 };
-
         gsap.to(peelObj, {
             pct: 48,
             ease: "none",
             scrollTrigger: {
-                trigger: document.body,
+                trigger: "body",
                 start: "top top",
                 end: "450px top",
-                scrub: 0.3
+                scrub: 0.3,
             },
             onUpdate: () => {
-                const P = peelObj.pct;
-                mainEl.style.clipPath = `inset(${P}% 0 0 0)`;
-                flapEl.style.clipPath = `inset(0 0 ${100 - P}% 0)`;
-                flapEl.style.top = `${2 * P - 100}%`;
+                applyPeel(peelObj.pct);
             }
         });
     }
