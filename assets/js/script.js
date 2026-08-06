@@ -597,7 +597,7 @@ function initTechLogoLoop() {
 }
 
 /* ===================================================
-   SCROLL-DRIVEN STICKER PEEL (GSAP ScrollTrigger + Draggable)
+   SCROLL-DRIVEN STICKER PEEL (RAF polling - Lenis compatible)
 =================================================== */
 function initStickerPeel() {
     const stickerEl = document.getElementById("heroSticker");
@@ -607,48 +607,52 @@ function initStickerPeel() {
 
     if (!stickerEl || !containerEl || !mainEl || !flapEl) return;
 
-    // Helper to update clip-path
-    function applyPeel(P) {
-        mainEl.style.clipPath = `inset(${P}% 0 0 0 round 0px)`;
-        flapEl.style.clipPath = `inset(0 0 ${100 - P}% 0 round 0px)`;
-        flapEl.style.top = `${(2 * P) - 100}%`;
-    }
+    const imgEl = mainEl.querySelector("img");
+    if (!imgEl) return;
 
-    // Peel via raw scroll listener (works regardless of ScrollTrigger/Lenis state)
-    function onScroll() {
-        const scrollY = window.scrollY || document.documentElement.scrollTop;
-        const maxScroll = 450; // pixels to complete peel
-        const P = Math.min(48, (scrollY / maxScroll) * 48);
-        applyPeel(P);
-    }
+    // Wait for image to load so we know its real height
+    function setupPeel() {
+        const imgH = imgEl.naturalHeight || imgEl.offsetHeight || 150;
+        const imgW = imgEl.naturalWidth || imgEl.offsetWidth || 150;
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // init on load
+        // Set explicit pixel height on container based on rendered image size
+        const renderedH = mainEl.offsetHeight || 150;
+        containerEl.style.height = renderedH + "px";
 
-    // Also try GSAP ScrollTrigger if available (with Lenis support)
-    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-        gsap.registerPlugin(ScrollTrigger);
+        // RAF polling - reads window.scrollY directly every frame
+        // Works correctly with Lenis because Lenis still updates window.scrollY
+        let lastPct = -1;
+        function rafPeel() {
+            const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+            const maxScroll = 500;
+            const raw = Math.min(1, scrollY / maxScroll);
+            const P = raw * 50; // 0 -> 50%
 
-        const peelObj = { pct: 0 };
-        gsap.to(peelObj, {
-            pct: 48,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "450px top",
-                scrub: 0.3,
-            },
-            onUpdate: () => {
-                applyPeel(peelObj.pct);
+            if (Math.abs(P - lastPct) > 0.05) {
+                lastPct = P;
+                mainEl.style.clipPath     = `inset(${P.toFixed(2)}% 0 0 0)`;
+                flapEl.style.clipPath     = `inset(0 0 ${(100 - P).toFixed(2)}% 0)`;
+                flapEl.style.top          = `${((2 * P) - 100).toFixed(2)}%`;
             }
-        });
+
+            requestAnimationFrame(rafPeel);
+        }
+        requestAnimationFrame(rafPeel);
     }
 
-    // 2. GSAP Draggable Interaction
+    // Run after image loads (or immediately if already cached)
+    if (imgEl.complete && imgEl.naturalHeight > 0) {
+        setupPeel();
+    } else {
+        imgEl.addEventListener("load", setupPeel, { once: true });
+        // Fallback if load event already fired
+        setTimeout(setupPeel, 300);
+    }
+
+    // GSAP Draggable Interaction
     if (typeof gsap !== "undefined" && typeof Draggable !== "undefined") {
         gsap.registerPlugin(Draggable);
-        const boundsEl = document.querySelector(".hero .container");
+        const boundsEl = document.querySelector(".hero .container") || document.body;
 
         Draggable.create(stickerEl, {
             type: "x,y",

@@ -3767,6 +3767,8 @@ body .aurora span:nth-child(4){
     user-select: none;
     -webkit-user-select: none;
     touch-action: none;
+    /* overflow must be visible so flap can appear ABOVE */
+    overflow: visible;
 }
 
 .draggable-sticker:active {
@@ -3776,7 +3778,7 @@ body .aurora span:nth-child(4){
 .sticker-container {
     position: relative;
     width: 150px;
-    height: auto;
+    /* height set by JS after image load */
     overflow: visible;
 }
 
@@ -3784,9 +3786,11 @@ body .aurora span:nth-child(4){
     position: relative;
     width: 100%;
     z-index: 1;
+    /* Start fully visible */
     clip-path: inset(0% 0 0 0);
     will-change: clip-path;
     filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+    overflow: visible;
 }
 
 .sticker-image {
@@ -3801,12 +3805,17 @@ body .aurora span:nth-child(4){
     width: 100%;
     height: 100%;
     left: 0;
+    /* Start at -100% (above the sticker) */
     top: -100%;
     z-index: 2;
+    /* Mirror vertically to simulate peeled-back sticker */
     transform: scaleY(-1);
-    transform-origin: center;
+    transform-origin: bottom center;
+    /* Start fully hidden (clipped from bottom = show 0%) */
     clip-path: inset(0 0 100% 0);
     will-change: clip-path, top;
+    overflow: visible;
+    filter: drop-shadow(0 -4px 10px rgba(0, 0, 0, 0.4));
 }
 
 .flap-image {
@@ -3814,7 +3823,7 @@ body .aurora span:nth-child(4){
     height: auto;
     display: block;
     pointer-events: none;
-    filter: brightness(0.85) contrast(1.1) drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+    filter: brightness(0.8) sepia(0.1);
 }
 
 @media screen and (max-width:768px){
