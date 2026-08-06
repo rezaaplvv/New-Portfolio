@@ -588,31 +588,44 @@ function initTechLogoLoop() {
 }
 
 /* ===================================================
-   STICKER PEEL INTERACTIVE LOGIC (GSAP DRAGGABLE)
+   SCROLL-DRIVEN STICKER PEEL (GSAP ScrollTrigger + Draggable)
 =================================================== */
 function initStickerPeel() {
     const stickerEl = document.getElementById("heroSticker");
     const containerEl = document.getElementById("stickerContainer");
-    const lightEl = document.getElementById("stickerPointLight");
-    const lightFlippedEl = document.getElementById("stickerPointLightFlipped");
+    const mainEl = containerEl?.querySelector(".sticker-main");
+    const flapEl = containerEl?.querySelector(".flap");
 
-    if (!stickerEl || !containerEl) return;
+    if (!stickerEl || !containerEl || !mainEl || !flapEl) return;
 
-    containerEl.addEventListener("mousemove", (e) => {
-        const rect = containerEl.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    // 1. GSAP ScrollTrigger Scrubbing Peel Animation
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
 
-        if (lightEl) {
-            lightEl.setAttribute("x", x);
-            lightEl.setAttribute("y", y);
-        }
-        if (lightFlippedEl) {
-            lightFlippedEl.setAttribute("x", x);
-            lightFlippedEl.setAttribute("y", rect.height - y);
-        }
-    });
+        const peelObj = { pct: 0 };
 
+        gsap.to(peelObj, {
+            pct: 50,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.5
+            },
+            onUpdate: () => {
+                const p = peelObj.pct.toFixed(1);
+                // Update clip-path on sticker-main
+                mainEl.style.clipPath = `polygon(-10px ${p}%, 110% ${p}%, 110% 110%, -10px 110%)`;
+                
+                // Update clip-path and top position on flap
+                flapEl.style.clipPath = `polygon(-10px -10px, 110% -10px, 110% ${p}%, -10px ${p}%)`;
+                flapEl.style.top = `calc(-100% + ${2 * p}% - 1px)`;
+            }
+        });
+    }
+
+    // 2. GSAP Draggable Interaction
     if (typeof gsap !== "undefined" && typeof Draggable !== "undefined") {
         gsap.registerPlugin(Draggable);
         const boundsEl = document.querySelector(".hero .container");
