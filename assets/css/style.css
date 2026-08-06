@@ -590,6 +590,14 @@ body::after{
     animation:blinkCursor .8s infinite;
 }
 
+.hero-cta-group{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+
 .cta-button{
     display:flex;
     align-items:center;
@@ -631,8 +639,36 @@ body::after{
         box-shadow .28s cubic-bezier(.16,1,.3,1),
         background .28s ease,
         color .28s ease;
+}
 
-        
+.cta-cv-button{
+    background:rgba(255,255,255,.08);
+    color:#ffffff;
+    border:1px solid rgba(255,255,255,.25);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.18);
+    animation-delay:1.05s;
+}
+
+.cta-cv-button:hover{
+    background:#ffffff;
+    color:#111111;
+    border-color:#ffffff;
+    box-shadow:0 14px 35px rgba(255,255,255,.2);
+}
+
+.cv-download-icon{
+    font-size:17px;
+    color:#ffffff;
+    transition:transform .28s ease, color .28s ease;
+}
+
+.cta-cv-button:hover .cv-download-icon{
+    color:#111111;
+    transform:translateY(2px);
 }
 
 .cta-arrow{
