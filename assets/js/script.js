@@ -604,67 +604,72 @@ function initStickerPeel() {
     const containerEl = document.getElementById("stickerContainer");
     const mainEl      = containerEl?.querySelector(".sticker-main");
     const flapEl      = containerEl?.querySelector(".flap");
-    if (!stickerEl || !containerEl || !mainEl || !flapEl) return;
+
+    console.log("[StickerPeel] init:", { stickerEl, containerEl, mainEl, flapEl });
+    if (!stickerEl || !containerEl || !mainEl || !flapEl) {
+        console.warn("[StickerPeel] Missing element, aborting.");
+        return;
+    }
 
     const img = mainEl.querySelector("img");
-    if (!img) return;
+    if (!img) { console.warn("[StickerPeel] No img found."); return; }
 
-    let H = 0; // real rendered height in pixels
+    let H = 0;
 
     function applyPeel(scrollY) {
         if (H <= 0) return;
         const maxScroll = 400;
-        const t = Math.min(1, Math.max(0, scrollY / maxScroll)); // 0 → 1
+        const t = Math.min(1, Math.max(0, scrollY / maxScroll));
 
-        const clipped = t * H;              // top pixels hidden from main
-        const flapShow = (1 - t) * H;      // clip from top of flap (show bottom portion)
-        const flapTop  = (t - 1) * H;      // flapEl top in px (goes from -H → 0)
+        const clipped  = t * H;
+        const flapClip = (1 - t) * H;
+        const flapTop  = (t - 1) * H;
 
         mainEl.style.clipPath = `inset(${clipped.toFixed(1)}px 0 0 0)`;
-        flapEl.style.clipPath = `inset(${flapShow.toFixed(1)}px 0 0 0)`;
+        flapEl.style.clipPath = `inset(${flapClip.toFixed(1)}px 0 0 0)`;
         flapEl.style.top      = flapTop.toFixed(1) + "px";
     }
 
     function startPeel() {
-        H = img.offsetHeight;
-        if (H <= 0) { setTimeout(startPeel, 150); return; }
+        // Try multiple methods to get the rendered image height
+        const rect = img.getBoundingClientRect();
+        H = rect.height > 0 ? rect.height
+          : img.offsetHeight > 0 ? img.offsetHeight
+          : img.naturalHeight > 0 ? img.naturalHeight * (150 / (img.naturalWidth || 150))
+          : 150; // absolute fallback
 
-        // Set explicit pixel height so flap height:100% works correctly
+        console.log("[StickerPeel] H =", H, "| rect:", rect, "| offsetH:", img.offsetHeight);
+
         containerEl.style.height = H + "px";
         flapEl.style.height      = H + "px";
 
-        // Init at scroll=0
-        applyPeel(0);
+        applyPeel(window.scrollY || 0);
 
-        // 1. Lenis scroll callback (most reliable with Lenis)
+        // Lenis scroll callback
         if (window.lenis) {
+            console.log("[StickerPeel] Attaching Lenis scroll listener");
             window.lenis.on("scroll", ({ scroll }) => applyPeel(scroll));
+        } else {
+            console.warn("[StickerPeel] window.lenis not found, using native scroll");
         }
 
-        // 2. Native scroll fallback
+        // Native scroll fallback
         window.addEventListener("scroll", () => {
-            applyPeel(window.scrollY || document.documentElement.scrollTop || 0);
+            applyPeel(window.scrollY || 0);
         }, { passive: true });
 
-        // 3. RAF loop as belt-and-suspenders (catches any case above misses)
-        let prevY = -1;
+        // RAF loop — runs every frame, guaranteed to catch Lenis updates
         function raf() {
-            const y = window.scrollY || 0;
-            if (Math.abs(y - prevY) > 0.2) {
-                prevY = y;
-                applyPeel(y);
-            }
+            applyPeel(window.scrollY || 0);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
     }
 
-    // Start once image is ready
-    if (img.complete && img.naturalHeight > 0) {
-        // Small delay to ensure layout is painted
-        setTimeout(startPeel, 100);
+    // Wait for full page load (window.load) to ensure layout is complete
+    if (document.readyState === "complete") {
+        startPeel();
     } else {
-        img.addEventListener("load", () => setTimeout(startPeel, 100), { once: true });
-        setTimeout(startPeel, 600); // hard fallback
+        window.addEventListener("load", startPeel, { once: true });
     }
 }
