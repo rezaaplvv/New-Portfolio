@@ -400,9 +400,9 @@ function playSound(audio) {
         audio.currentTime = 0;
         const p = audio.play();
         if (p !== undefined) {
-            p.catch(() => {});
+            p.catch(() => { });
         }
-    } catch (e) {}
+    } catch (e) { }
 }
 
 document.querySelectorAll(".nav-links a").forEach(menu => {
@@ -483,7 +483,7 @@ stickyMenuBtn?.addEventListener("click", () => {
 =================================================== */
 function initGSAPBouncyFooter() {
     if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-    
+
     gsap.registerPlugin(ScrollTrigger);
 
     const bouncyPath = document.getElementById("bouncy-path");
@@ -500,8 +500,8 @@ function initGSAPBouncyFooter() {
                 const startY = 360;
 
                 const anim = { y: startY };
-                gsap.fromTo(anim, 
-                    { y: startY }, 
+                gsap.fromTo(anim,
+                    { y: startY },
                     {
                         y: 0,
                         duration: 3.6,
@@ -597,45 +597,40 @@ function initTechLogoLoop() {
 }
 
 /* ===================================================
-   SCROLL-DRIVEN STICKER PEEL – polygon clip-path (% based, no height measurement)
+   SCROLL-DRIVEN STICKER PEEL (React Bits Scroll-Driven)
 =================================================== */
 function initStickerPeel() {
     const containerEl = document.getElementById("stickerContainer");
-    const mainEl      = containerEl?.querySelector(".sticker-main");
-    const flapEl      = containerEl?.querySelector(".flap");
-    if (!containerEl || !mainEl || !flapEl) return;
+    if (!containerEl) return;
 
-    /* applyPeel drives both elements with % polygon values.
-       No px measurements, no scaleY, no height% = guaranteed cross-browser. */
-    function applyPeel(scrollY) {
-        const t    = Math.min(1, Math.max(0, scrollY / 400)); // 0 → 1
-        const peel = +(t * 60).toFixed(2);                    // 0% → 60%
-
-        // Main sticker: growing triangle cut from top-right corner
-        mainEl.style.clipPath =
-            `polygon(0% 0%, ${100 - peel}% 0%, 100% ${peel}%, 100% 100%, 0% 100%)`;
-
-        // Flap: show ONLY the triangular folded-back corner
-        flapEl.style.clipPath =
-            `polygon(${100 - peel}% 0%, 100% 0%, 100% ${peel}%)`;
+    function updatePeel(scrollY) {
+        // Map scrollY (0 -> 400px) to peel percentage (0% -> 45%)
+        const maxScroll = 400;
+        const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+        const peelPercent = (progress * 45).toFixed(2);
+        
+        containerEl.style.setProperty("--peel-pct", peelPercent + "%");
     }
 
-    // Init at current scroll (handle page reload mid-scroll)
-    applyPeel(window.scrollY || 0);
+    // Initialize position at current scroll
+    updatePeel(window.scrollY || 0);
 
-    // ① Lenis scroll callback — fires every Lenis animation frame
+    // 1. Lenis scroll listener
     if (window.lenis) {
-        window.lenis.on("scroll", ({ scroll }) => applyPeel(scroll));
+        window.lenis.on("scroll", (e) => {
+            const y = (e && typeof e.scroll === "number") ? e.scroll : (window.scrollY || 0);
+            updatePeel(y);
+        });
     }
 
-    // ② Native scroll — catches non-Lenis environments
+    // 2. Native scroll listener
     window.addEventListener("scroll", () => {
-        applyPeel(window.scrollY || 0);
+        updatePeel(window.scrollY || 0);
     }, { passive: true });
 
-    // ③ RAF loop — safety net, runs every frame regardless
+    // 3. Continuous RAF safety loop
     (function raf() {
-        applyPeel(window.scrollY || 0);
+        updatePeel(window.scrollY || 0);
         requestAnimationFrame(raf);
     })();
 }
