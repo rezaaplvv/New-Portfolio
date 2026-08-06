@@ -597,74 +597,74 @@ function initTechLogoLoop() {
 }
 
 /* ===================================================
-   SCROLL-DRIVEN STICKER PEEL (RAF polling - Lenis compatible)
+   SCROLL-DRIVEN STICKER PEEL (Pixel-based, Lenis-aware)
 =================================================== */
 function initStickerPeel() {
-    const stickerEl = document.getElementById("heroSticker");
+    const stickerEl   = document.getElementById("heroSticker");
     const containerEl = document.getElementById("stickerContainer");
-    const mainEl = containerEl?.querySelector(".sticker-main");
-    const flapEl = containerEl?.querySelector(".flap");
-
+    const mainEl      = containerEl?.querySelector(".sticker-main");
+    const flapEl      = containerEl?.querySelector(".flap");
     if (!stickerEl || !containerEl || !mainEl || !flapEl) return;
 
-    const imgEl = mainEl.querySelector("img");
-    if (!imgEl) return;
+    const img = mainEl.querySelector("img");
+    if (!img) return;
 
-    // Wait for image to load so we know its real height
-    function setupPeel() {
-        const imgH = imgEl.naturalHeight || imgEl.offsetHeight || 150;
-        const imgW = imgEl.naturalWidth || imgEl.offsetWidth || 150;
+    let H = 0; // real rendered height in pixels
 
-        // Set explicit pixel height on container based on rendered image size
-        const renderedH = mainEl.offsetHeight || 150;
-        containerEl.style.height = renderedH + "px";
+    function applyPeel(scrollY) {
+        if (H <= 0) return;
+        const maxScroll = 400;
+        const t = Math.min(1, Math.max(0, scrollY / maxScroll)); // 0 → 1
 
-        // RAF polling - reads window.scrollY directly every frame
-        // Works correctly with Lenis because Lenis still updates window.scrollY
-        let lastPct = -1;
-        function rafPeel() {
-            const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-            const maxScroll = 500;
-            const raw = Math.min(1, scrollY / maxScroll);
-            const P = raw * 50; // 0 -> 50%
+        const clipped = t * H;              // top pixels hidden from main
+        const flapShow = (1 - t) * H;      // clip from top of flap (show bottom portion)
+        const flapTop  = (t - 1) * H;      // flapEl top in px (goes from -H → 0)
 
-            if (Math.abs(P - lastPct) > 0.05) {
-                lastPct = P;
-                mainEl.style.clipPath     = `inset(${P.toFixed(2)}% 0 0 0)`;
-                flapEl.style.clipPath     = `inset(0 0 ${(100 - P).toFixed(2)}% 0)`;
-                flapEl.style.top          = `${((2 * P) - 100).toFixed(2)}%`;
-            }
+        mainEl.style.clipPath = `inset(${clipped.toFixed(1)}px 0 0 0)`;
+        flapEl.style.clipPath = `inset(${flapShow.toFixed(1)}px 0 0 0)`;
+        flapEl.style.top      = flapTop.toFixed(1) + "px";
+    }
 
-            requestAnimationFrame(rafPeel);
+    function startPeel() {
+        H = img.offsetHeight;
+        if (H <= 0) { setTimeout(startPeel, 150); return; }
+
+        // Set explicit pixel height so flap height:100% works correctly
+        containerEl.style.height = H + "px";
+        flapEl.style.height      = H + "px";
+
+        // Init at scroll=0
+        applyPeel(0);
+
+        // 1. Lenis scroll callback (most reliable with Lenis)
+        if (window.lenis) {
+            window.lenis.on("scroll", ({ scroll }) => applyPeel(scroll));
         }
-        requestAnimationFrame(rafPeel);
-    }
 
-    // Run after image loads (or immediately if already cached)
-    if (imgEl.complete && imgEl.naturalHeight > 0) {
-        setupPeel();
-    } else {
-        imgEl.addEventListener("load", setupPeel, { once: true });
-        // Fallback if load event already fired
-        setTimeout(setupPeel, 300);
-    }
+        // 2. Native scroll fallback
+        window.addEventListener("scroll", () => {
+            applyPeel(window.scrollY || document.documentElement.scrollTop || 0);
+        }, { passive: true });
 
-    // GSAP Draggable Interaction
-    if (typeof gsap !== "undefined" && typeof Draggable !== "undefined") {
-        gsap.registerPlugin(Draggable);
-        const boundsEl = document.querySelector(".hero .container") || document.body;
-
-        Draggable.create(stickerEl, {
-            type: "x,y",
-            bounds: boundsEl,
-            inertia: true,
-            onDrag() {
-                const rot = gsap.utils.clamp(-24, 24, this.deltaX * 0.4);
-                gsap.to(stickerEl, { rotation: rot, duration: 0.15, ease: "power1.out" });
-            },
-            onDragEnd() {
-                gsap.to(stickerEl, { rotation: 0, duration: 0.8, ease: "power2.out" });
+        // 3. RAF loop as belt-and-suspenders (catches any case above misses)
+        let prevY = -1;
+        function raf() {
+            const y = window.scrollY || 0;
+            if (Math.abs(y - prevY) > 0.2) {
+                prevY = y;
+                applyPeel(y);
             }
-        });
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+    }
+
+    // Start once image is ready
+    if (img.complete && img.naturalHeight > 0) {
+        // Small delay to ensure layout is painted
+        setTimeout(startPeel, 100);
+    } else {
+        img.addEventListener("load", () => setTimeout(startPeel, 100), { once: true });
+        setTimeout(startPeel, 600); // hard fallback
     }
 }
