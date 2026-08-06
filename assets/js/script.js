@@ -603,34 +603,33 @@ function initStickerPeel() {
     const containerEl = document.getElementById("stickerContainer");
     if (!containerEl) return;
 
-    function updatePeel(scrollY) {
-        // Map scrollY (0 -> 400px) to peel percentage (0% -> 45%)
+    function updatePeel() {
+        const y = (window.lenis && typeof window.lenis.scroll === "number")
+            ? window.lenis.scroll
+            : (window.scrollY || document.documentElement.scrollTop || 0);
+
+        // Map scrollY (0 -> 400px) to peel percentage (0% -> 40%)
         const maxScroll = 400;
-        const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
-        const peelPercent = (progress * 45).toFixed(2);
-        
+        const progress = Math.min(1, Math.max(0, y / maxScroll));
+        const peelPercent = (progress * 40).toFixed(2);
+
         containerEl.style.setProperty("--peel-pct", peelPercent + "%");
     }
 
-    // Initialize position at current scroll
-    updatePeel(window.scrollY || 0);
+    // Initialize at current scroll position
+    updatePeel();
 
-    // 1. Lenis scroll listener
+    // 1. Lenis scroll event
     if (window.lenis) {
-        window.lenis.on("scroll", (e) => {
-            const y = (e && typeof e.scroll === "number") ? e.scroll : (window.scrollY || 0);
-            updatePeel(y);
-        });
+        window.lenis.on("scroll", updatePeel);
     }
 
-    // 2. Native scroll listener
-    window.addEventListener("scroll", () => {
-        updatePeel(window.scrollY || 0);
-    }, { passive: true });
+    // 2. Native scroll event
+    window.addEventListener("scroll", updatePeel, { passive: true });
 
-    // 3. Continuous RAF safety loop
+    // 3. Continuous RAF loop for 60fps smooth sync
     (function raf() {
-        updatePeel(window.scrollY || 0);
+        updatePeel();
         requestAnimationFrame(raf);
     })();
 }

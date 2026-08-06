@@ -3758,9 +3758,6 @@ body .aurora span:nth-child(4){
    STICKER PEEL COMPONENT (React Bits Scroll-Driven)
 =================================================== */
 :root {
-    --sticker-p: 10px;
-    --sticker-start: calc(-1 * var(--sticker-p));
-    --sticker-end: calc(100% + var(--sticker-p));
     --peel-pct: 0%;
 }
 
@@ -3792,12 +3789,8 @@ body .aurora span:nth-child(4){
     position: relative;
     width: 100%;
     z-index: 1;
-    clip-path: polygon(
-        var(--sticker-start) var(--peel-pct),
-        var(--sticker-end) var(--peel-pct),
-        var(--sticker-end) var(--sticker-end),
-        var(--sticker-start) var(--sticker-end)
-    );
+    -webkit-clip-path: polygon(0% var(--peel-pct), 100% var(--peel-pct), 100% 100%, 0% 100%);
+    clip-path: polygon(0% var(--peel-pct), 100% var(--peel-pct), 100% 100%, 0% 100%);
     will-change: clip-path;
     filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
 }
@@ -3814,14 +3807,10 @@ body .aurora span:nth-child(4){
     width: 100%;
     height: 100%;
     left: 0;
-    top: calc(-100% + 2 * var(--peel-pct) - 1px);
+    top: calc(-100% + 2 * var(--peel-pct));
     z-index: 2;
-    clip-path: polygon(
-        var(--sticker-start) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
-        var(--sticker-end) var(--peel-pct),
-        var(--sticker-start) var(--peel-pct)
-    );
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% var(--peel-pct), 0% var(--peel-pct));
+    clip-path: polygon(0% 0%, 100% 0%, 100% var(--peel-pct), 0% var(--peel-pct));
     transform: scaleY(-1);
     will-change: clip-path, top;
 }
