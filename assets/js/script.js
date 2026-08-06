@@ -513,10 +513,12 @@ if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
         initGSAPBouncyFooter();
         initTechLogoLoop();
+        initStickerPeel();
     });
 } else {
     initGSAPBouncyFooter();
     initTechLogoLoop();
+    initStickerPeel();
 }
 
 /* ===================================================
@@ -583,4 +585,49 @@ function initTechLogoLoop() {
     }
 
     requestAnimationFrame(loopStep);
+}
+
+/* ===================================================
+   STICKER PEEL INTERACTIVE LOGIC (GSAP DRAGGABLE)
+=================================================== */
+function initStickerPeel() {
+    const stickerEl = document.getElementById("heroSticker");
+    const containerEl = document.getElementById("stickerContainer");
+    const lightEl = document.getElementById("stickerPointLight");
+    const lightFlippedEl = document.getElementById("stickerPointLightFlipped");
+
+    if (!stickerEl || !containerEl) return;
+
+    containerEl.addEventListener("mousemove", (e) => {
+        const rect = containerEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        if (lightEl) {
+            lightEl.setAttribute("x", x);
+            lightEl.setAttribute("y", y);
+        }
+        if (lightFlippedEl) {
+            lightFlippedEl.setAttribute("x", x);
+            lightFlippedEl.setAttribute("y", rect.height - y);
+        }
+    });
+
+    if (typeof gsap !== "undefined" && typeof Draggable !== "undefined") {
+        gsap.registerPlugin(Draggable);
+        const boundsEl = document.querySelector(".hero .container");
+
+        Draggable.create(stickerEl, {
+            type: "x,y",
+            bounds: boundsEl,
+            inertia: true,
+            onDrag() {
+                const rot = gsap.utils.clamp(-24, 24, this.deltaX * 0.4);
+                gsap.to(stickerEl, { rotation: rot, duration: 0.15, ease: "power1.out" });
+            },
+            onDragEnd() {
+                gsap.to(stickerEl, { rotation: 0, duration: 0.8, ease: "power2.out" });
+            }
+        });
+    }
 }
