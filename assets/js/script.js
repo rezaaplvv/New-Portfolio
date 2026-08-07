@@ -522,12 +522,10 @@ if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
         initGSAPBouncyFooter();
         initTechLogoLoop();
-        initStickerPeel();
     });
 } else {
     initGSAPBouncyFooter();
     initTechLogoLoop();
-    initStickerPeel();
 }
 
 /* ===================================================
@@ -594,53 +592,4 @@ function initTechLogoLoop() {
     }
 
     requestAnimationFrame(loopStep);
-}
-
-/* ===================================================
-   SCROLL-DRIVEN STICKER PEEL (React Bits Scroll-Driven)
-=================================================== */
-function initStickerPeel() {
-    const containerEl = document.getElementById("stickerContainer");
-    const mainEl      = containerEl?.querySelector(".sticker-main");
-    const flapEl      = containerEl?.querySelector(".flap");
-    if (!containerEl || !mainEl || !flapEl) return;
-
-    function updatePeel() {
-        const y = (window.lenis && typeof window.lenis.scroll === "number")
-            ? window.lenis.scroll
-            : (window.scrollY || document.documentElement.scrollTop || 0);
-
-        // Map scrollY (0 -> 400px) to peel percentage (0% -> 40%)
-        const maxScroll = 400;
-        const progress = Math.min(1, Math.max(0, y / maxScroll));
-        const peel = (progress * 40).toFixed(2); // e.g. "15.50"
-
-        // 1. Cut top portion off sticker-main
-        const mainClip = `polygon(0% ${peel}%, 100% ${peel}%, 100% 100%, 0% 100%)`;
-        mainEl.style.webkitClipPath = mainClip;
-        mainEl.style.clipPath = mainClip;
-
-        // 2. Adjust flap position and clip
-        flapEl.style.top = `calc(-100% + ${2 * peel}%)`;
-        const flapClip = `polygon(0% 0%, 100% 0%, 100% ${peel}%, 0% ${peel}%)`;
-        flapEl.style.webkitClipPath = flapClip;
-        flapEl.style.clipPath = flapClip;
-    }
-
-    // Initialize position at current scroll
-    updatePeel();
-
-    // 1. Lenis scroll listener
-    if (window.lenis) {
-        window.lenis.on("scroll", updatePeel);
-    }
-
-    // 2. Native scroll listener
-    window.addEventListener("scroll", updatePeel, { passive: true });
-
-    // 3. Continuous RAF loop for 60fps smooth sync
-    (function raf() {
-        updatePeel();
-        requestAnimationFrame(raf);
-    })();
 }
