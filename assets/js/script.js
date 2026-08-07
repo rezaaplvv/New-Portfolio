@@ -564,7 +564,7 @@ function initTechLogoLoop() {
         isHovered = false;
     });
 
-    track.querySelectorAll(".tech-card").forEach(card => {
+    track.querySelectorAll(".tech-icon-item").forEach(card => {
         card.addEventListener("mouseenter", () => {
             if (typeof playSound === "function" && typeof soundClick !== "undefined") {
                 playSound(soundClick);
