@@ -538,34 +538,43 @@ function initStickerPeel() {
     const target      = document.getElementById("heroSticker");
     if (!containerEl || !target) return;
 
-    function updatePeel() {
+    let currentPeel = 0;
+    let targetPeel  = 0;
+
+    function calcTarget() {
         const y = (window.lenis && typeof window.lenis.scroll === "number")
             ? window.lenis.scroll
             : (window.scrollY || document.documentElement.scrollTop || 0);
 
-        // Map scrollY (0 -> 70px) to peel percentage (0% -> 50%) for clear, immediate fold visual
-        const maxScroll = 70;
+        const maxScroll = 90;
         const progress = Math.min(1, Math.max(0, y / maxScroll));
-        const peel = (progress * 50).toFixed(2); // 0 to 50%
-
-        containerEl.style.setProperty("--peel-back", peel + "%");
+        targetPeel = progress * 50;
     }
 
-    // Run immediately
-    updatePeel();
+    calcTarget();
+    currentPeel = targetPeel;
+    containerEl.style.setProperty("--peel-back", currentPeel.toFixed(2) + "%");
 
-    // Listen to scroll events
-    window.addEventListener("scroll", updatePeel, { passive: true });
-    document.addEventListener("scroll", updatePeel, { passive: true });
+    window.addEventListener("scroll", calcTarget, { passive: true });
+    document.addEventListener("scroll", calcTarget, { passive: true });
 
     if (window.lenis) {
-        window.lenis.on("scroll", updatePeel);
+        window.lenis.on("scroll", calcTarget);
     }
 
-    // Also run on animation frame loop to guarantee sync
-    (function rafLoop() {
-        updatePeel();
-        requestAnimationFrame(rafLoop);
+    // 60fps Smooth Lerp update loop (eliminates CSS transition conflicts and scroll-up lag)
+    (function lerpLoop() {
+        calcTarget();
+
+        // 12% linear interpolation per frame for silky smooth movement both scroll UP and DOWN
+        currentPeel += (targetPeel - currentPeel) * 0.12;
+
+        if (Math.abs(targetPeel - currentPeel) < 0.05) {
+            currentPeel = targetPeel;
+        }
+
+        containerEl.style.setProperty("--peel-back", currentPeel.toFixed(2) + "%");
+        requestAnimationFrame(lerpLoop);
     })();
 
     // GSAP Draggable support
