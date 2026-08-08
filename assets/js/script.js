@@ -546,7 +546,7 @@ function initStickerPeel() {
             ? window.lenis.scroll
             : (window.scrollY || document.documentElement.scrollTop || 0);
 
-        const maxScroll = 90;
+        const maxScroll = 45;
         const progress = Math.min(1, Math.max(0, y / maxScroll));
         targetPeel = progress * 50;
     }
@@ -566,8 +566,8 @@ function initStickerPeel() {
     (function lerpLoop() {
         calcTarget();
 
-        // 12% linear interpolation per frame for silky smooth movement both scroll UP and DOWN
-        currentPeel += (targetPeel - currentPeel) * 0.12;
+        // 22% linear interpolation per frame for fast, ultra-responsive scroll feedback
+        currentPeel += (targetPeel - currentPeel) * 0.22;
 
         if (Math.abs(targetPeel - currentPeel) < 0.05) {
             currentPeel = targetPeel;
