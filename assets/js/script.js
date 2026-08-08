@@ -537,7 +537,7 @@ function initCircularText() {
     const el = document.getElementById("circularText");
     if (!el) return;
 
-    const text = "MEDAN ★ INDONESIA ★ MEDAN ★ INDONESIA ★ ";
+    const text = "MEDAN • INDONESIA • MEDAN • INDONESIA • ";
     const letters = Array.from(text);
     const total = letters.length;
 

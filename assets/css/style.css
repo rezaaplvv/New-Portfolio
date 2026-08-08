@@ -677,7 +677,7 @@ body::after{
 .circular-text-wrapper {
     position: absolute;
     top: 50px;
-    right: 80px;
+    right: 140px;
     z-index: 90;
     user-select: none;
     -webkit-user-select: none;
