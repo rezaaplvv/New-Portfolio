@@ -657,3 +657,47 @@ function initTechLogoLoop() {
     initSingleMarqueeLoop("techLogoLoopRow1", "techStackTrack1", "techListOriginal1", "left", 55);
     initSingleMarqueeLoop("techLogoLoopRow2", "techStackTrack2", "techListOriginal2", "right", 55);
 }
+
+/* ===================================================
+   COMMON QUESTIONS (FAQ) ACCORDION
+=================================================== */
+function initFAQAccordion() {
+    const faqItems = document.querySelectorAll(".faq-item");
+    if (!faqItems.length) return;
+
+    faqItems.forEach(item => {
+        const btn = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
+        if (!btn || !answer) return;
+
+        btn.addEventListener("click", () => {
+            const isActive = item.classList.contains("active");
+
+            faqItems.forEach(other => {
+                if (other !== item) {
+                    other.classList.remove("active");
+                    const otherBtn = other.querySelector(".faq-question");
+                    const otherAns = other.querySelector(".faq-answer");
+                    if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+                    if (otherAns) otherAns.style.maxHeight = null;
+                }
+            });
+
+            if (isActive) {
+                item.classList.remove("active");
+                btn.setAttribute("aria-expanded", "false");
+                answer.style.maxHeight = null;
+            } else {
+                item.classList.add("active");
+                btn.setAttribute("aria-expanded", "true");
+                answer.style.maxHeight = answer.scrollHeight + 30 + "px";
+            }
+        });
+    });
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFAQAccordion);
+} else {
+    initFAQAccordion();
+}

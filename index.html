@@ -89,8 +89,8 @@
 
                 <ul class="nav-links" id="mainNav">
                     <li><a href="#hero" class="active-link">Home</a></li>
-                    <li><a href="#portfolio" class="">Portofolio</a></li>
-                    <li><a href="#prices" class="">Prices</a></li>
+                    <li><a href="#projects" class="">Projects</a></li>
+                    <li><a href="#faq" class="">FAQ</a></li>
                     <li><a href="#payment" class="">Order</a></li>
                 </ul>
 
@@ -112,8 +112,8 @@
 
                 <ul class="nav-links" id="stickyNav">
                     <li><a href="#hero" class="active-link">Home</a></li>
-                    <li><a href="#portfolio" class="">Portofolio</a></li>
-                    <li><a href="#prices" class="">Prices</a></li>
+                    <li><a href="#projects" class="">Projects</a></li>
+                    <li><a href="#faq" class="">FAQ</a></li>
                     <li><a href="#payment" class="">Order</a></li>
                 </ul>
 
@@ -305,7 +305,7 @@
 
                     <!-- SEE MORE BUTTON -->
                     <div class="projects-cta">
-                        <a href="#portfolio" class="projects-see-more-btn">
+                        <a href="#faq" class="projects-see-more-btn">
                             See More
                             <i class="fas fa-arrow-right projects-btn-icon"></i>
                         </a>
@@ -313,186 +313,61 @@
                 </div>
             </section>
 
-            <section id="portfolio" class="portfolio-section">
-
-
-                <div class="main-container reveal show">
-
-                    <div class="left-section reveal-left delay1 show">
-
-                        <div class="phone">
-                            <img src="./assets/images/phone-instagram.png" alt="Phone Preview" class="phone-image">
-                        </div>
-
+            <!-- COMMON QUESTIONS (FAQ) SECTION -->
+            <section id="faq" class="faq-section">
+                <div class="faq-container">
+                    <div class="faq-header">
+                        <h2 class="faq-title">
+                            Common <span>Questions</span>
+                        </h2>
                     </div>
 
-                    <div class="right-section reveal-right delay2 show">
-
-                        <h1 class="reveal delay2 show">Portfolio Design</h1>
-
-                        <div class="tabs reveal delay3 show" id="tabs"></div>
-
-                        <div class="carousel-container reveal-scale delay4 show">
-
-                            <button class="nav-btn prev-btn" onclick="move(-1)">
-                                ❮
+                    <div class="faq-accordion">
+                        <!-- FAQ Item 1 -->
+                        <div class="faq-item active">
+                            <button class="faq-question" type="button" aria-expanded="true">
+                                <span>What is your primary tech stack?</span>
+                                <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
                             </button>
-
-                            <div class="track" id="track"></div>
-
-                            <button class="nav-btn next-btn" onclick="move(1)">
-                                ❯
-                            </button>
-
-                            <div class="portfolio-scroll-hint" id="portfolioScrollHint">
-                                Scroll <span>›› </span>
+                            <div class="faq-answer" style="max-height: 200px;">
+                                <p>I focus on Full-Stack development using Next.js and Tailwind CSS for the Frontend, and Node.js or Laravel for the Backend.</p>
                             </div>
-
                         </div>
 
-                        <p class="portfolio-note reveal delay4 show">
-                            Untuk portofolio lengkap, cek Instagram
-                            <a href="https://instagram.com/gendesign.id" target="_blank">
-                                @gendesign.id
-                            </a>
-                        </p>
+                        <!-- FAQ Item 2 -->
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>Are you open to project collaboration?</span>
+                                <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Absolutely! I am always open to collaborating on innovative projects, whether it's researching the latest technologies or contributing to open-source.</p>
+                            </div>
+                        </div>
 
+                        <!-- FAQ Item 3 -->
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>How do you ensure code quality?</span>
+                                <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                            </button>
+                            <div class="faq-answer">
+                                <p>I prioritize clean code principles and structured architecture to ensure applications are easy to maintain and scale in the long run.</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 4 -->
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>What is your main focus when building a system?</span>
+                                <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Functionality and User Experience. I make sure every line of code I write delivers real, effective solutions for users.</p>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-
-            </section>
-
-            <section id="prices" class="pricing-section">
-
-
-                <div class="pricing-container reveal show">
-
-                    <h1 class="pricing-title reveal delay1 show">
-                        Paket <span>Harga</span>
-                    </h1>
-
-                    <p class="pricing-subtitle reveal delay2 show">
-                        Pilih Paket Harga Yang Sesuai Dengan Kebutuhan Anda!
-                    </p>
-
-                    <div class="pricing-cards">
-
-                        <!-- BASIC -->
-                        <div class="card reveal-left delay1 show">
-
-                            <div class="brand">
-                                <img src="./assets/images/logo-hitam.png" alt="GEN Logo">
-                            </div>
-
-                            <h2>Basic</h2>
-
-                            <div class="price-container">
-                                <span class="old-price">
-                                    Rp25K
-                                </span>
-
-                                <span class="price">
-                                    Rp20.000
-                                    <small>/Design</small>
-                                </span>
-                            </div>
-
-                            <button class="btn">
-                                Order Now
-                            </button>
-
-                            <ul class="specs">
-                                <li>✓ 2x Revisi</li>
-                                <li>✓ Estimasi Pengerjaan 1-2 Hari</li>
-                                <li>✓ +Rp5.000 Jika ingin pengerjaan lebih cepat</li>
-                            </ul>
-
-                        </div>
-
-                        <!-- STANDARD -->
-                        <div class="card popular reveal delay2 show"
-                            style="transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1);">
-
-                            <div class="badge">
-                                Populer
-                            </div>
-
-                            <div class="brand">
-                                <img src="./assets/images/logo-card.png" alt="GEN Logo">
-                            </div>
-
-                            <h2>Standard</h2>
-
-                            <div class="price-container">
-                                <span class="old-price">
-                                    Rp40K
-                                </span>
-
-                                <span class="price">
-                                    Rp30.000
-                                    <small>/Design</small>
-                                </span>
-                            </div>
-
-                            <button class="btn">
-                                Order Now
-                            </button>
-
-                            <ul class="specs">
-                                <li>✓ 5x Revisi</li>
-                                <li>✓ Estimasi Pengerjaan 1-2 Hari</li>
-                                <li>✓ +5.000 Jika ingin pengerjaan lebih cepat</li>
-                            </ul>
-
-                        </div>
-
-                        <!-- PREMIUM -->
-                        <div class="card reveal-right delay3 show"
-                            style="transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1);">
-
-                            <div class="brand">
-                                <img src="./assets/images/logo-hitam.png" alt="GEN Logo">
-                            </div>
-
-                            <h2>Premium</h2>
-
-                            <div class="price-container">
-                                <span class="old-price">
-                                    Rp70K
-                                </span>
-
-                                <span class="price">
-                                    Rp55.000
-                                    <small>/Design</small>
-                                </span>
-                            </div>
-
-                            <button class="btn">
-                                Order Now
-                            </button>
-
-                            <ul class="specs">
-                                <li>
-                                    ✓ Unlimited Revisi kecil
-                                    (warna, teks, dll)
-                                </li>
-
-                                <li>
-                                    ✓ Estimasi Pengerjaan 1-2 Hari
-                                </li>
-
-                                <li>
-                                    ✓ +10.000 Jika ingin pengerjaan lebih cepat
-                                </li>
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
             </section>
 
             <section id="payment" class="contact-payment-section">
