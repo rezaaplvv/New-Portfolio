@@ -19,7 +19,7 @@ const ctx = canvas.getContext('2d');
 const cardImg = new Image();
 cardImg.src = "./assets/images/card1.png";
 const logoImg = new Image();
-logoImg.src = "./assets/images/logo.png";
+logoImg.src = "./assets/images/peel-sticker.png";
 const ringImg = new Image();
 ringImg.src = "./assets/images/ring.png";
 const hint = document.getElementById('hint');
@@ -457,8 +457,8 @@ function drawLanyard() {
 
         ctx.scale(-1, -1);
 
-        const logoW = 26;
-        const logoH = 12;
+        const logoW = 24;
+        const logoH = 24;
 
         ctx.drawImage(
           logoImg,
