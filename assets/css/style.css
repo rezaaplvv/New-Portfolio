@@ -684,7 +684,7 @@ body::after{
 .draggable-sticker {
     position: absolute;
     top: 40px;
-    right: 80px;
+    right: 140px;
     z-index: 95;
     cursor: grab;
     user-select: none;
@@ -726,6 +726,7 @@ body::after{
         var(--sticker-end) var(--sticker-end),
         var(--sticker-start) var(--sticker-end)
     );
+    transition: clip-path 0.22s cubic-bezier(0.25, 1, 0.5, 1), -webkit-clip-path 0.22s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: clip-path, -webkit-clip-path;
     filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
 }
@@ -757,6 +758,7 @@ body::after{
         var(--sticker-start) var(--peel-back)
     );
     transform: scaleY(-1);
+    transition: clip-path 0.22s cubic-bezier(0.25, 1, 0.5, 1), -webkit-clip-path 0.22s cubic-bezier(0.25, 1, 0.5, 1), top 0.22s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: clip-path, -webkit-clip-path, top;
 }
 
