@@ -726,7 +726,7 @@ body::after{
         var(--sticker-end) var(--sticker-end),
         var(--sticker-start) var(--sticker-end)
     );
-    transition: clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1), -webkit-clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: clip-path 0.3s cubic-bezier(0.2, 1, 0.3, 1), -webkit-clip-path 0.3s cubic-bezier(0.2, 1, 0.3, 1);
     will-change: clip-path, -webkit-clip-path;
     filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
 }
@@ -758,7 +758,7 @@ body::after{
         var(--sticker-start) var(--peel-back)
     );
     transform: scaleY(-1);
-    transition: clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1), -webkit-clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1), top 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: clip-path 0.3s cubic-bezier(0.2, 1, 0.3, 1), -webkit-clip-path 0.3s cubic-bezier(0.2, 1, 0.3, 1), top 0.3s cubic-bezier(0.2, 1, 0.3, 1);
     will-change: clip-path, -webkit-clip-path, top;
 }
 
