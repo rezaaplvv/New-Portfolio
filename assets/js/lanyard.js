@@ -423,7 +423,7 @@ function drawLanyard() {
   ctx.font = "700 10px Arial";
 
   let carried = 0;
-  const LABEL_GAP = 30;
+  const LABEL_GAP = 50;
   let labelIndex = 0;
 
   for (let i = 0; i < HOOK_INDEX; i++) {
@@ -457,8 +457,8 @@ function drawLanyard() {
 
         ctx.scale(-1, -1);
 
-        const logoW = 24;
-        const logoH = 24;
+        const logoW = 38;
+        const logoH = 38;
 
         ctx.drawImage(
           logoImg,
