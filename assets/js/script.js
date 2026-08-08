@@ -522,36 +522,12 @@ if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
         initGSAPBouncyFooter();
         initTechLogoLoop();
-        initCircularText();
         initStickerPeel();
     });
 } else {
     initGSAPBouncyFooter();
     initTechLogoLoop();
-    initCircularText();
     initStickerPeel();
-}
-
-/* ===================================================
-   REACT BITS CIRCULAR TEXT COMPONENT
-=================================================== */
-function initCircularText() {
-    const el = document.getElementById("circularText");
-    if (!el) return;
-
-    const text = "MEDAN • INDONESIA • MEDAN • INDONESIA • ";
-    const letters = Array.from(text);
-    const total = letters.length;
-
-    el.innerHTML = "";
-    letters.forEach((letter, i) => {
-        const span = document.createElement("span");
-        span.textContent = letter;
-        const deg = (360 / total) * i;
-        span.style.transform = `rotateZ(${deg}deg)`;
-        span.style.webkitTransform = `rotateZ(${deg}deg)`;
-        el.appendChild(span);
-    });
 }
 
 /* ===================================================

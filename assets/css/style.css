@@ -672,77 +672,19 @@ body::after{
 }
 
 /* ===================================================
-   REACT BITS CIRCULAR TEXT COMPONENT
-=================================================== */
-.circular-text-wrapper {
-    position: absolute;
-    top: 50px;
-    right: 210px;
-    z-index: 90;
-    user-select: none;
-    -webkit-user-select: none;
-    pointer-events: auto;
-}
-
-.circular-text {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    font-weight: 800;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    cursor: pointer;
-    transform-origin: 50% 50%;
-    animation: circularSpin 20s linear infinite;
-    transition: color 0.3s ease, filter 0.3s ease, transform 0.3s ease;
-}
-
-.circular-text:hover {
-    animation-duration: 5s; /* SpeedUp on hover */
-    color: #ffffff;
-    filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.7));
-    transform: scale(1.1);
-}
-
-.circular-text span {
-    position: absolute;
-    display: inline-block;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transform-origin: 50% 50%;
-    transition: transform 0.3s ease;
-}
-
-@keyframes circularSpin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* ===================================================
    REACT BITS STICKER PEEL COMPONENT (SCROLL-DRIVEN)
 =================================================== */
 :root {
     --sticker-rotate: 15deg;
-    --sticker-p: 10px;
+    --sticker-p: 12px;
     --sticker-start: calc(-1 * var(--sticker-p));
     --sticker-end: calc(100% + var(--sticker-p));
 }
 
 .draggable-sticker {
     position: absolute;
-    top: 45px;
-    right: 60px;
+    top: 40px;
+    right: 80px;
     z-index: 95;
     cursor: grab;
     user-select: none;
@@ -756,7 +698,7 @@ body::after{
 
 .sticker-container {
     position: relative;
-    width: 120px;
+    width: 170px;
     transform: rotate(var(--sticker-rotate));
     transform-origin: center;
     overflow: visible;
@@ -785,7 +727,7 @@ body::after{
         var(--sticker-start) var(--sticker-end)
     );
     will-change: clip-path, -webkit-clip-path;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
 }
 
 .sticker-image {
@@ -823,17 +765,10 @@ body::after{
     height: auto;
     display: block;
     pointer-events: none;
-    filter: brightness(0.6) contrast(1.1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.45));
+    filter: brightness(0.6) contrast(1.1) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
 }
 
 @media screen and (max-width: 768px) {
-    .circular-text-wrapper {
-        top: 15px;
-        right: 90px;
-        transform: scale(0.65);
-        transform-origin: top right;
-    }
-
     .draggable-sticker {
         top: 15px;
         right: 15px;
