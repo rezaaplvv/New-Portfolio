@@ -543,8 +543,8 @@ function initStickerPeel() {
             ? window.lenis.scroll
             : (window.scrollY || document.documentElement.scrollTop || 0);
 
-        // Map scrollY (0 -> 170px) to peel percentage (0% -> 48%) for smooth, natural folding
-        const maxScroll = 170;
+        // Map scrollY (0 -> 130px) to peel percentage (0% -> 48%)
+        const maxScroll = 130;
         const progress = Math.min(1, Math.max(0, y / maxScroll));
         const peel = (progress * 48).toFixed(2); // 0 to 48%
 
