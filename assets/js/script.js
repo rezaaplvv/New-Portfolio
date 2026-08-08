@@ -596,18 +596,17 @@ function initStickerPeel() {
 }
 
 /* ===================================================
-   REACT BITS LOGOLOOP (TECH STACK INFINITE MARQUEE)
+   REACT BITS LOGOLOOP (TECH STACK 2-ROW INFINITE MARQUEE)
 =================================================== */
-function initTechLogoLoop() {
-    const container = document.getElementById("techLogoLoop");
-    const track = document.getElementById("techStackTrack");
-    const origList = document.getElementById("techListOriginal");
+function initSingleMarqueeLoop(containerId, trackId, origListId, direction = "left", speed = 50) {
+    const container = document.getElementById(containerId);
+    const track = document.getElementById(trackId);
+    const origList = document.getElementById(origListId);
     if (!container || !track || !origList) return;
 
-    // 1. Auto-duplicate list copies so loop is 100% seamless without gap
-    const listWidth = origList.getBoundingClientRect().width || 1200;
+    const singleWidth = origList.getBoundingClientRect().width || 600;
     const containerWidth = container.clientWidth || 1000;
-    const copiesNeeded = Math.max(3, Math.ceil(containerWidth / listWidth) + 2);
+    const copiesNeeded = Math.max(4, Math.ceil((containerWidth * 2) / singleWidth) + 2);
 
     track.innerHTML = "";
     for (let i = 0; i < copiesNeeded; i++) {
@@ -617,27 +616,14 @@ function initTechLogoLoop() {
         track.appendChild(clone);
     }
 
-    // 2. Infinite Loop Animation with smooth lerp physics
-    let offset = 0;
-    let velocity = 70;
-    let targetVelocity = 70;
+    let offset = direction === "right" ? -singleWidth : 0;
+    let velocity = speed;
+    let targetVelocity = speed;
     let lastTime = null;
     let isHovered = false;
 
-    container.addEventListener("mouseenter", () => {
-        isHovered = true;
-    });
-    container.addEventListener("mouseleave", () => {
-        isHovered = false;
-    });
-
-    track.querySelectorAll(".tech-icon-item").forEach(card => {
-        card.addEventListener("mouseenter", () => {
-            if (typeof playSound === "function" && typeof soundClick !== "undefined") {
-                playSound(soundClick);
-            }
-        });
-    });
+    container.addEventListener("mouseenter", () => { isHovered = true; });
+    container.addEventListener("mouseleave", () => { isHovered = false; });
 
     function loopStep(timestamp) {
         if (!lastTime) lastTime = timestamp;
@@ -648,15 +634,26 @@ function initTechLogoLoop() {
         const easing = 1 - Math.exp(-delta / 0.25);
         velocity += (target - velocity) * easing;
 
-        const seqWidth = origList.getBoundingClientRect().width || 1200;
-        if (seqWidth > 0) {
+        if (direction === "left") {
+            offset -= velocity * delta;
+            if (offset <= -singleWidth) {
+                offset += singleWidth;
+            }
+        } else { // right direction
             offset += velocity * delta;
-            offset = ((offset % seqWidth) + seqWidth) % seqWidth;
-            track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+            if (offset >= 0) {
+                offset -= singleWidth;
+            }
         }
 
+        track.style.transform = `translate3d(${offset.toFixed(2)}px, 0, 0)`;
         requestAnimationFrame(loopStep);
     }
 
     requestAnimationFrame(loopStep);
+}
+
+function initTechLogoLoop() {
+    initSingleMarqueeLoop("techLogoLoopRow1", "techStackTrack1", "techListOriginal1", "left", 55);
+    initSingleMarqueeLoop("techLogoLoopRow2", "techStackTrack2", "techListOriginal2", "right", 55);
 }

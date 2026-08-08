@@ -831,6 +831,12 @@ body::after{
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
 }
 
+.tech-stack-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
 /* LogoLoop CSS (React Bits Style) */
 .logoloop {
     position: relative;
