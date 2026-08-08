@@ -543,8 +543,8 @@ function initStickerPeel() {
             ? window.lenis.scroll
             : (window.scrollY || document.documentElement.scrollTop || 0);
 
-        // Map scrollY (0 -> 350px) to peel percentage (0% -> 50%)
-        const maxScroll = 350;
+        // Map scrollY (0 -> 100px) to peel percentage (0% -> 50%) for fast, immediate response at top
+        const maxScroll = 100;
         const progress = Math.min(1, Math.max(0, y / maxScroll));
         const peel = (progress * 50).toFixed(2); // 0 to 50%
 
