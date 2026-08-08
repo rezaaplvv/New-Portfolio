@@ -735,7 +735,6 @@ body::after{
 :root {
     --sticker-rotate: 15deg;
     --sticker-p: 10px;
-    --peel-pct: 0%;
     --sticker-start: calc(-1 * var(--sticker-p));
     --sticker-end: calc(100% + var(--sticker-p));
 }
@@ -761,6 +760,7 @@ body::after{
     transform: rotate(var(--sticker-rotate));
     transform-origin: center;
     overflow: visible;
+    --peel-back: 0%;
 }
 
 .sticker-container * {
@@ -773,8 +773,14 @@ body::after{
     width: 100%;
     z-index: 1;
     clip-path: polygon(
-        var(--sticker-start) var(--peel-pct),
-        var(--sticker-end) var(--peel-pct),
+        var(--sticker-start) var(--peel-back),
+        var(--sticker-end) var(--peel-back),
+        var(--sticker-end) var(--sticker-end),
+        var(--sticker-start) var(--sticker-end)
+    );
+    -webkit-clip-path: polygon(
+        var(--sticker-start) var(--peel-back),
+        var(--sticker-end) var(--peel-back),
         var(--sticker-end) var(--sticker-end),
         var(--sticker-start) var(--sticker-end)
     );
@@ -794,13 +800,19 @@ body::after{
     width: 100%;
     height: 100%;
     left: 0;
-    top: calc(-100% + 2 * var(--peel-pct) - 1px);
+    top: calc(-100% + 2 * var(--peel-back) - 1px);
     z-index: 2;
     clip-path: polygon(
         var(--sticker-start) var(--sticker-start),
         var(--sticker-end) var(--sticker-start),
-        var(--sticker-end) var(--peel-pct),
-        var(--sticker-start) var(--peel-pct)
+        var(--sticker-end) var(--peel-back),
+        var(--sticker-start) var(--peel-back)
+    );
+    -webkit-clip-path: polygon(
+        var(--sticker-start) var(--sticker-start),
+        var(--sticker-end) var(--sticker-start),
+        var(--sticker-end) var(--peel-back),
+        var(--sticker-start) var(--peel-back)
     );
     transform: scaleY(-1);
     will-change: clip-path, -webkit-clip-path, top;

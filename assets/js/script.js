@@ -559,50 +559,37 @@ function initCircularText() {
 =================================================== */
 function initStickerPeel() {
     const containerEl = document.getElementById("stickerContainer");
-    const mainEl      = containerEl?.querySelector(".sticker-main");
-    const flapEl      = containerEl?.querySelector(".flap");
     const target      = document.getElementById("heroSticker");
-    if (!containerEl || !mainEl || !flapEl || !target) return;
+    if (!containerEl || !target) return;
 
     function updatePeel() {
         const y = (window.lenis && typeof window.lenis.scroll === "number")
             ? window.lenis.scroll
             : (window.scrollY || document.documentElement.scrollTop || 0);
 
-        // Map scrollY (0 -> 400px) to peel percentage (0% -> 45%)
-        const maxScroll = 400;
+        // Map scrollY (0 -> 350px) to peel percentage (0% -> 50%)
+        const maxScroll = 350;
         const progress = Math.min(1, Math.max(0, y / maxScroll));
-        const peel = (progress * 45).toFixed(2); // e.g. "22.50"
+        const peel = (progress * 50).toFixed(2); // 0 to 50%
 
-        const p = peel + "%";
-        const start = "calc(-1 * 10px)";
-        const end   = "calc(100% + 10px)";
-
-        // 1. Update main sticker clip
-        const mainClip = `polygon(${start} ${p}, ${end} ${p}, ${end} ${end}, ${start} ${end})`;
-        mainEl.style.webkitClipPath = mainClip;
-        mainEl.style.clipPath = mainClip;
-
-        // 2. Update flap top position and clip
-        flapEl.style.top = `calc(-100% + ${2 * peel}% - 1px)`;
-        const flapClip = `polygon(${start} ${start}, ${end} ${start}, ${end} ${p}, ${start} ${p})`;
-        flapEl.style.webkitClipPath = flapClip;
-        flapEl.style.clipPath = flapClip;
+        containerEl.style.setProperty("--peel-back", peel + "%");
     }
 
-    // Init at current scroll position
+    // Run immediately
     updatePeel();
 
-    // Listen to Lenis and native scroll
+    // Listen to scroll events
+    window.addEventListener("scroll", updatePeel, { passive: true });
+    document.addEventListener("scroll", updatePeel, { passive: true });
+
     if (window.lenis) {
         window.lenis.on("scroll", updatePeel);
     }
-    window.addEventListener("scroll", updatePeel, { passive: true });
 
-    // Continuous 60fps RAF loop
-    (function raf() {
+    // Also run on animation frame loop to guarantee sync
+    (function rafLoop() {
         updatePeel();
-        requestAnimationFrame(raf);
+        requestAnimationFrame(rafLoop);
     })();
 
     // GSAP Draggable support
