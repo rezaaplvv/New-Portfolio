@@ -730,13 +730,12 @@ body::after{
 }
 
 /* ===================================================
-   REACT BITS STICKER PEEL COMPONENT
+   REACT BITS STICKER PEEL COMPONENT (SCROLL-DRIVEN)
 =================================================== */
 :root {
     --sticker-rotate: 15deg;
     --sticker-p: 10px;
-    --sticker-peelback-hover: 30%;
-    --sticker-peelback-active: 45%;
+    --peel-pct: 0%;
     --sticker-start: calc(-1 * var(--sticker-p));
     --sticker-end: calc(100% + var(--sticker-p));
 }
@@ -774,31 +773,13 @@ body::after{
     width: 100%;
     z-index: 1;
     clip-path: polygon(
-        var(--sticker-start) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
+        var(--sticker-start) var(--peel-pct),
+        var(--sticker-end) var(--peel-pct),
         var(--sticker-end) var(--sticker-end),
         var(--sticker-start) var(--sticker-end)
     );
-    transition: clip-path 0.5s ease-out;
+    will-change: clip-path, -webkit-clip-path;
     filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
-}
-
-.sticker-container:hover .sticker-main {
-    clip-path: polygon(
-        var(--sticker-start) var(--sticker-peelback-hover),
-        var(--sticker-end) var(--sticker-peelback-hover),
-        var(--sticker-end) var(--sticker-end),
-        var(--sticker-start) var(--sticker-end)
-    );
-}
-
-.sticker-container:active .sticker-main {
-    clip-path: polygon(
-        var(--sticker-start) var(--sticker-peelback-active),
-        var(--sticker-end) var(--sticker-peelback-active),
-        var(--sticker-end) var(--sticker-end),
-        var(--sticker-start) var(--sticker-end)
-    );
 }
 
 .sticker-image {
@@ -813,36 +794,16 @@ body::after{
     width: 100%;
     height: 100%;
     left: 0;
-    top: calc(-100% - 2 * var(--sticker-p));
+    top: calc(-100% + 2 * var(--peel-pct) - 1px);
     z-index: 2;
     clip-path: polygon(
         var(--sticker-start) var(--sticker-start),
         var(--sticker-end) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
-        var(--sticker-start) var(--sticker-start)
+        var(--sticker-end) var(--peel-pct),
+        var(--sticker-start) var(--peel-pct)
     );
     transform: scaleY(-1);
-    transition: all 0.5s ease-out;
-}
-
-.sticker-container:hover .flap {
-    clip-path: polygon(
-        var(--sticker-start) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
-        var(--sticker-end) var(--sticker-peelback-hover),
-        var(--sticker-start) var(--sticker-peelback-hover)
-    );
-    top: calc(-100% + 2 * var(--sticker-peelback-hover) - 1px);
-}
-
-.sticker-container:active .flap {
-    clip-path: polygon(
-        var(--sticker-start) var(--sticker-start),
-        var(--sticker-end) var(--sticker-start),
-        var(--sticker-end) var(--sticker-peelback-active),
-        var(--sticker-start) var(--sticker-peelback-active)
-    );
-    top: calc(-100% + 2 * var(--sticker-peelback-active) - 1px);
+    will-change: clip-path, -webkit-clip-path, top;
 }
 
 .flap-image {
