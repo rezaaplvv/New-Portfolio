@@ -85,7 +85,12 @@ const fonts = [
 "Permanent Marker"
 ];
 
-// Font flicker interval disabled for clean professional presentation
+if (orderText) {
+    setInterval(() => {
+        const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+        orderText.style.fontFamily = randomFont;
+    }, 150);
+}
 
 const container = document.getElementById("particles");
 
