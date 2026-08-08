@@ -697,7 +697,40 @@ function initFAQAccordion() {
 }
 
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initFAQAccordion);
+    document.addEventListener("DOMContentLoaded", () => {
+        initFAQAccordion();
+        initContactForm();
+    });
 } else {
     initFAQAccordion();
+    initContactForm();
+}
+
+/* ===================================================
+   CONTACT FORM WHATSAPP AUTO-FORMAT SUBMIT
+=================================================== */
+function initContactForm() {
+    const form = document.getElementById("contactForm");
+    if (!form) return;
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("contactName")?.value || "";
+        const email = document.getElementById("contactEmail")?.value || "";
+        const subject = document.getElementById("contactSubject")?.value || "";
+        const message = document.getElementById("contactMessage")?.value || "";
+
+        const text = `Halo Reza! 👋
+
+Nama: ${name}
+Email: ${email}
+Topik: ${subject}
+
+Pesan:
+${message}`;
+
+        const waUrl = `https://wa.me/6283133387676?text=${encodeURIComponent(text)}`;
+        window.open(waUrl, "_blank");
+    });
 }
