@@ -677,7 +677,7 @@ body::after{
 .circular-text-wrapper {
     position: absolute;
     top: 50px;
-    right: 140px;
+    right: 210px;
     z-index: 90;
     user-select: none;
     -webkit-user-select: none;
@@ -729,8 +729,139 @@ body::after{
     }
 }
 
+/* ===================================================
+   REACT BITS STICKER PEEL COMPONENT
+=================================================== */
+:root {
+    --sticker-rotate: 15deg;
+    --sticker-p: 10px;
+    --sticker-peelback-hover: 30%;
+    --sticker-peelback-active: 45%;
+    --sticker-start: calc(-1 * var(--sticker-p));
+    --sticker-end: calc(100% + var(--sticker-p));
+}
+
+.draggable-sticker {
+    position: absolute;
+    top: 45px;
+    right: 60px;
+    z-index: 95;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: visible;
+}
+
+.draggable-sticker:active {
+    cursor: grabbing;
+}
+
+.sticker-container {
+    position: relative;
+    width: 120px;
+    transform: rotate(var(--sticker-rotate));
+    transform-origin: center;
+    overflow: visible;
+}
+
+.sticker-container * {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.sticker-main {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    clip-path: polygon(
+        var(--sticker-start) var(--sticker-start),
+        var(--sticker-end) var(--sticker-start),
+        var(--sticker-end) var(--sticker-end),
+        var(--sticker-start) var(--sticker-end)
+    );
+    transition: clip-path 0.5s ease-out;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+}
+
+.sticker-container:hover .sticker-main {
+    clip-path: polygon(
+        var(--sticker-start) var(--sticker-peelback-hover),
+        var(--sticker-end) var(--sticker-peelback-hover),
+        var(--sticker-end) var(--sticker-end),
+        var(--sticker-start) var(--sticker-end)
+    );
+}
+
+.sticker-container:active .sticker-main {
+    clip-path: polygon(
+        var(--sticker-start) var(--sticker-peelback-active),
+        var(--sticker-end) var(--sticker-peelback-active),
+        var(--sticker-end) var(--sticker-end),
+        var(--sticker-start) var(--sticker-end)
+    );
+}
+
+.sticker-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
+}
+
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: calc(-100% - 2 * var(--sticker-p));
+    z-index: 2;
+    clip-path: polygon(
+        var(--sticker-start) var(--sticker-start),
+        var(--sticker-end) var(--sticker-start),
+        var(--sticker-end) var(--sticker-start),
+        var(--sticker-start) var(--sticker-start)
+    );
+    transform: scaleY(-1);
+    transition: all 0.5s ease-out;
+}
+
+.sticker-container:hover .flap {
+    clip-path: polygon(
+        var(--sticker-start) var(--sticker-start),
+        var(--sticker-end) var(--sticker-start),
+        var(--sticker-end) var(--sticker-peelback-hover),
+        var(--sticker-start) var(--sticker-peelback-hover)
+    );
+    top: calc(-100% + 2 * var(--sticker-peelback-hover) - 1px);
+}
+
+.sticker-container:active .flap {
+    clip-path: polygon(
+        var(--sticker-start) var(--sticker-start),
+        var(--sticker-end) var(--sticker-start),
+        var(--sticker-end) var(--sticker-peelback-active),
+        var(--sticker-start) var(--sticker-peelback-active)
+    );
+    top: calc(-100% + 2 * var(--sticker-peelback-active) - 1px);
+}
+
+.flap-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    filter: brightness(0.6) contrast(1.1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.45));
+}
+
 @media screen and (max-width: 768px) {
     .circular-text-wrapper {
+        top: 15px;
+        right: 90px;
+        transform: scale(0.65);
+        transform-origin: top right;
+    }
+
+    .draggable-sticker {
         top: 15px;
         right: 15px;
         transform: scale(0.75);

@@ -523,11 +523,13 @@ if (document.readyState === "loading") {
         initGSAPBouncyFooter();
         initTechLogoLoop();
         initCircularText();
+        initStickerPeel();
     });
 } else {
     initGSAPBouncyFooter();
     initTechLogoLoop();
     initCircularText();
+    initStickerPeel();
 }
 
 /* ===================================================
@@ -550,6 +552,30 @@ function initCircularText() {
         span.style.webkitTransform = `rotateZ(${deg}deg)`;
         el.appendChild(span);
     });
+}
+
+/* ===================================================
+   REACT BITS STICKER PEEL (Hover/Active Peel & Draggable)
+=================================================== */
+function initStickerPeel() {
+    const target = document.getElementById("heroSticker");
+    if (!target) return;
+
+    if (typeof gsap !== "undefined" && typeof Draggable !== "undefined") {
+        gsap.registerPlugin(Draggable);
+        Draggable.create(target, {
+            type: "x,y",
+            bounds: target.parentNode,
+            inertia: true,
+            onDrag() {
+                const rot = gsap.utils.clamp(-24, 24, this.deltaX * 0.4);
+                gsap.to(target, { rotation: rot, duration: 0.15, ease: "power1.out" });
+            },
+            onDragEnd() {
+                gsap.to(target, { rotation: 0, duration: 0.8, ease: "power2.out" });
+            }
+        });
+    }
 }
 
 /* ===================================================
